@@ -26,7 +26,7 @@ var plugins = [
     'process.env.NODE_ENV': process.env.NODE_ENV
   }),
   new HtmlWebpackPlugin({
-    favicon: path.join(__dirname, 'favicon.ico'),
+    favicon: path.join(__dirname, 'favicon.png'),
     filename: path.join(__dirname, index_path),
     template: path.join(__dirname, '/src/index.ejs')
   })

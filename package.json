@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server -d --history-api-fallback --hot --inline --progress --colors --port 4000",
     "build": "webpack --progress --colors",
-    "cdn_dist": "node script cdn_dist"
+    "githubDist": "node script/cdn_dist"
   },
   "author": "",
   "dependencies": {

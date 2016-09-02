@@ -27,9 +27,9 @@ export class Top extends Component {//出现上导航，容器为：上导航以
         <div className={style.topNavWarp}>
           <Link className={style.title} to="/">Clear</Link>
           <div className={style.topNav}>
-            <Link to="/env" activeClassName={style.active}>环境</Link>
-            <Link to="/React">React</Link>
-            <Link to="/cmpt">组件库</Link>
+            <Link to={(this.props.route.path) + '/env'} activeClassName={style.active}>环境</Link>
+            <Link to="React">React</Link>
+            <Link to="cmpt">组件库</Link>
           </div>
           <div className={style.topRightBar}>
           <Provider store={userStore}>
@@ -54,7 +54,9 @@ export class Home extends Component {
       <div className={style.homeTitle}>
         <big>Clear</big><small>前端架构</small>
         <br/>
-        webpack + sass + possCss + react-router + react + redux
+        webpack + sass + possCss
+         + <a href='https://github.com/reactjs/react-router/tree/master/docs'>react-router</a>
+         + react + redux
         </div>
     );
   }

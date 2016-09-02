@@ -23,7 +23,7 @@ export class LoginBox extends Component {
       <div className={style.loginBox}>
         <div className={style.loginBox_title}>登录</div>
         <hr/>
-        <input type="text" name='name' defaultValue={this.state.name} onChange={::this.setName} placeholder='用户名' />
+        <input type="text" name='name' onChange={::this.setName} placeholder='用户名' />
         <input type='password' disabled='disabled' placeholder='密码' />
         <hr/>
         <button onClick={::this.submit} className={style.btn}>确定</button>

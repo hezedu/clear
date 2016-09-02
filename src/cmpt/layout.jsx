@@ -25,15 +25,20 @@ export class Top extends Component {//出现上导航，容器为：上导航以
     return (
       <div className='height100'>
         <div className={style.topNavWarp}>
-          <Link className={style.title} to="/">clear前端架构</Link>
+          <Link className={style.title} to="/">Clear</Link>
           <div className={style.topNav}>
             <Link to="/env" activeClassName={style.active}>环境</Link>
             <Link to="/React">React</Link>
             <Link to="/cmpt">组件库</Link>
           </div>
+          <div className={style.topRightBar}>
           <Provider store={userStore}>
             <LoginBar />
           </Provider>
+          <a href='https://github.com/hezedu/clear' target='_blank' className={style.githubIcon}>
+          <img src='https://assets-cdn.github.com/pinned-octocat.svg' />
+          </a>
+          </div>
         </div>
         <div className={style.bottomWarp}>
           {this.props.children}
@@ -46,7 +51,11 @@ export class Top extends Component {//出现上导航，容器为：上导航以
 export class Home extends Component {
   render() {
     return (
-      <div className={style.homeTitle}>Home</div>
+      <div className={style.homeTitle}>
+        <big>Clear</big><small>前端架构</small>
+        <br/>
+        webpack + sass + possCss + react-router + react + redux
+        </div>
     );
   }
 }

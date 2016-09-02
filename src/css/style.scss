@@ -1,0 +1,50 @@
+$color:#fff;
+$topColor:#000;
+$leftColor:#888;
+$midColor:#444;
+$midColor2:#ccc;
+$topH : 50px;
+$leftWidth:200px;
+$leftAHeight:35px;
+
+*{margin: 0; padding: 0;box-sizing: border-box;}
+:global {
+  html , body, .height100{height: 100%;}
+}
+
+body{font-family:'微软雅黑';line-height: 1.5}
+ul, ol { list-style: none; }
+a { text-decoration: none;cursor:pointer;}
+a:hover{background: $leftColor}
+input{padding-left:.5em}
+hr{border-color: #fff}
+.btn{padding:5px 10px;cursor: pointer}
+.loginBox{width: 400px; height: 200px;margin:auto; position: absolute;
+  left:0; right:0; background: #eee;top:0; bottom:0;padding:10px;}
+.loginBox .btn{margin-top: 5px;float: right}
+.loginBox_title{text-align: center; padding: 5px;font-size:1.3em}
+.loginBox input{width:80%; display: block;margin:10px auto;height: 35px;}
+
+
+
+.homeTitle{position: absolute; top:0; bottom:0; width: 100%; text-align: center;
+   font-size: 100px;margin: auto; height: 200px;line-height: 200px;}
+
+.topNavWarp{padding-left: $leftWidth;padding-right: $leftWidth;
+  height:$topH;line-height: $topH;position: fixed; top:0;font-size:1.2em;
+  left:0;z-index: 2;width: 100%; background-color:$topColor;color:$color;}
+.title{left: 10px;color:$midColor2;position: absolute; display: block;font-size:1.2em;}
+.topNav{padding-left: 20px}
+.topNav a{color:$color; display: block;float: left; margin:0 10px;padding: 0 20px}
+.topNav a.active, .topNav a:hover{background: $leftColor}
+.loginBar{right:10px;font-size: 16px;position: absolute;color:$midColor2;}
+.loginBar a{color: $midColor2; padding:5px 10px;margin-left:10px;}
+
+.bottomWarp{padding-top:$topH;height: 100%;position: relative;}
+
+.mainWarp{padding-left:$leftWidth;width:100%; position: relative; height: 100%;}
+.main{height: 100%;width: 100%;padding:10px}
+.leftNav{width: $leftWidth;height: 100%;position: fixed;top:$topH;left:0;z-index: 2;padding-top: 10px;
+background-color: $leftColor}
+.leftNav a{color:$topColor;display: block; height: $leftAHeight;line-height: $leftAHeight;padding-left:10px;}
+.leftNav a.active, .leftNav a:hover{background-color: $color;color:$topColor}

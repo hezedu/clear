@@ -1,2 +1,3 @@
 /sas/*.db
 /node_modules
+/dist

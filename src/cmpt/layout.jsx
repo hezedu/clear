@@ -24,7 +24,6 @@ export class Top extends Component {//出现上导航，容器为：上导航以
     }
   }
   render() {
-    console.log('this', this.props);
     return (
       <div className='height100'>
         <div className={style.topNavWarp}>

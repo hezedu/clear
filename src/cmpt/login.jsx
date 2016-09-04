@@ -1,5 +1,5 @@
 import { Component} from 'react';
-import { Link } from '../lib/hack.jsx';
+import { ClearLink } from '../lib/hack.jsx';
 import userStore from '../store/user';
 import style from '../css/style.scss';
 import {connect} from 'react-redux';
@@ -41,7 +41,7 @@ class Bar extends Component {
     if(!this.props.user){
       return (
         <div className={style.loginBar}>
-          <Link to="/login">登录</Link>
+          <ClearLink to="/login">登录</ClearLink>
         </div>
       );
     }

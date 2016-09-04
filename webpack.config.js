@@ -9,12 +9,13 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var isPro = process.env.NODE_ENV === 'production';
 var bundle_name = '[name]_bundle.js';
 var chunk_name = '[name]_chunk.js';
-var index_path = conf.outPutDir + '/index.html';
-var publicPath = '/dist';
+var index_path = '/index.html';
+var publicPath = conf.outPutDir;
 
 
 if (isPro) {
-  publicPath = '/clear/dist';
+  publicPath = '/clear';
+  index_path = conf.outPutDir + '/index.html';
   //bundle_name = '[name]_bundle_[chunkhash].js';
   //chunk_name = '[name]_chunk_[chunkhash].js';
 }

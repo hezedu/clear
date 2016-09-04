@@ -71,7 +71,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, conf.outPutDir , conf.outPutFile),
-    publicPath: publicPath,
+    publicPath: publicPath + '/' + conf.outPutFile,
     filename: bundle_name,
     chunkFilename: chunk_name
   },
@@ -114,7 +114,7 @@ module.exports = {
   ],
   plugins: plugins,
   devServer: {
-    contentBase: './docs',
+    contentBase: './',
     hot: true
   }
 };

@@ -3,7 +3,7 @@ import { ClearLink } from '../lib/hack.jsx';
 import userStore from '../store/user';
 import style from '../css/style.scss';
 import {connect} from 'react-redux';
-
+import app from 'clear';
 const testData = {
   id:1,
   name: 'dw'
@@ -13,7 +13,7 @@ export class LoginBox extends Component {
   state = testData;
   submit(){
     userStore.dispatch({type: 'login', data: this.state});
-    this.context.router.push('/');
+    app.router.push('/');
   }
   setName(event){
     this.setState({name: event.target.value});
@@ -35,7 +35,7 @@ export class LoginBox extends Component {
 class Bar extends Component {
   logout(){
     this.props.dispatch({type: 'logout'});
-    this.context.router.push('/');
+    app.router.push('/login');
   }
   render() {
     if(!this.props.user){

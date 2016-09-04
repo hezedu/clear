@@ -1,23 +1,25 @@
-import { Component } from 'react';
+import { Component, PropTypes} from 'react';
 import { ClearLink } from '../lib/hack.jsx';
 import { Link } from 'react-router';
 import style from '../css/style.scss';
 import userStore from '../store/user';
 import {LoginBar} from './login.jsx';
 import {Provider} from 'react-redux';
+import clear from 'clear';
 
-
-export class Root extends Component {//一个虚类，容器为：整个屏幕
+export class Root extends Component {//出现router
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
+  componentWillMount(){
+    clear.router = this.context.router;
+  }
   render() {
-    return (
-      <div className='height100'>
-        {this.props.children}
-      </div>
-    );
+    return this.props.children;
   }
 }
 
-export class Top extends Component {//出现上导航，容器为：上导航以下。
+export class Top extends Component {//出现上导航
   static isLogin(nextState, replace){
     if(!userStore.getState()){
       replace('/login');
@@ -38,7 +40,7 @@ export class Top extends Component {//出现上导航，容器为：上导航以
             <LoginBar />
           </Provider>
           <a href='https://github.com/hezedu/clear' target='_blank' className={style.githubIcon}>
-          <img src='https://assets-cdn.github.com/pinned-octocat.svg' />
+          <img src='../static/pinned-octocat.svg' />
           </a>
           </div>
         </div>

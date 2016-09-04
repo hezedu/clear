@@ -1,20 +1,20 @@
-var conf = require('./conf');
+var path = require('path');
+var conf = require('./script/conf');
 var rucksack = require('rucksack-css');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
+
 
 
 var isPro = process.env.NODE_ENV === 'production';
 var bundle_name = '[name]_bundle.js';
 var chunk_name = '[name]_chunk.js';
-var index_path = '/index.html';
-var publicPath = '/clear';
+var index_path = conf.outPutDir + '/index.html';
+var publicPath = '/dist';
 
 
 if (isPro) {
-  index_path = conf.outPutPath + '/index.html';
-  //publicPath = '/clear';
+  publicPath = '/clear/dist';
   //bundle_name = '[name]_bundle_[chunkhash].js';
   //chunk_name = '[name]_chunk_[chunkhash].js';
 }
@@ -34,8 +34,7 @@ var plugins = [
   }),
   // create index.html
   new HtmlWebpackPlugin({
-    favicon: path.join(__dirname, 'favicon.png'),
-    CONFIG: JSON.stringify({ROOT_PATH : publicPath }),
+    ROOT_PATH: publicPath,
     filename: path.join(__dirname, index_path),
     template: path.join(__dirname, '/src/index.ejs')
   })
@@ -59,7 +58,7 @@ if (isPro) { //正式环境下压缩
 module.exports = {
   context: path.join(__dirname, './src'),
   entry: {
-    app: "./app.jsx",
+    app: "./index.jsx",
     vendor: [
       'react',
       'react-dom',
@@ -70,7 +69,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.join(__dirname, conf.outPutPath),
+    path: path.join(__dirname, conf.outPutDir , conf.outPutFile),
     publicPath: publicPath,
     filename: bundle_name,
     chunkFilename: chunk_name
@@ -102,7 +101,10 @@ module.exports = {
     }]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      'clear': 'virgin'
+    }
   },
   postcss: [
     rucksack({
@@ -111,7 +113,7 @@ module.exports = {
   ],
   plugins: plugins,
   devServer: {
-    contentBase: __dirname,
+    contentBase: './docs',
     hot: true
   }
 };

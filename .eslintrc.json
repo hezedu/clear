@@ -26,6 +26,9 @@
         "no-multiple-empty-lines": "error",
         "prefer-const": "error",
         "space-infix-ops": "error",
+        "camelcase": "error",
+        "arrow-parens": "error",
+        "no-confusing-arrow": "error",
         "no-console": 0,
         "linebreak-style": 0,
         "quotes": [

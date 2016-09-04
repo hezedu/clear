@@ -1,9 +1,11 @@
 import { Component } from 'react';
 import { ClearLink } from '../lib/hack.jsx';
+import { Link } from 'react-router';
 import style from '../css/style.scss';
 import userStore from '../store/user';
 import {LoginBar} from './login.jsx';
 import {Provider} from 'react-redux';
+
 
 export class Root extends Component {//一个虚类，容器为：整个屏幕
   render() {
@@ -22,13 +24,14 @@ export class Top extends Component {//出现上导航，容器为：上导航以
     }
   }
   render() {
+    console.log('this', this.props);
     return (
       <div className='height100'>
         <div className={style.topNavWarp}>
           <ClearLink className={style.title} to="/">Home</ClearLink>
           <div className={style.topNav}>
-            <ClearLink to='env' activeClassName={style.active}>环境</ClearLink>
-            <ClearLink to="React">学习</ClearLink>
+            <Link to='env' activeClassName={style.active}>环境</Link>
+            <ClearLink to="study">学习</ClearLink>
             <ClearLink to="cmpt">组件库</ClearLink>
           </div>
           <div className={style.topRightBar}>
@@ -67,7 +70,7 @@ export class Left extends Component { //出现左导航，容器为：main。
     return (
       <div>
         <div className={style.leftNav}>
-          <ClearLink to={this.props.route.path + '/about'} activeClassName={style.active}>About</ClearLink>
+          <ClearLink to='about' activeClassName={style.active}>About</ClearLink>
         </div>
         <div className={style.mainWarp}>
           <div className={style.main}>
@@ -79,10 +82,20 @@ export class Left extends Component { //出现左导航，容器为：main。
   }
 }
 
-export class LeftNav extends Component { //左导航
+export class About extends Component { //左导航
   render() {
+    //console.log('this.props.route', this);
     return (
       <ClearLink to={this.props.route.path + '/about'} activeClassName={style.active}>About</ClearLink>
+    );
+  }
+}
+
+export class Study extends Component { //左导航
+  render() {
+    //console.log('this.props.route', this);
+    return (
+      <ClearLink to={this.props.route.path + '/Study'} activeClassName={style.active}>About</ClearLink>
     );
   }
 }

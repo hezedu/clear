@@ -1,3 +1,4 @@
+var conf = require('./conf');
 var rucksack = require('rucksack-css');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -8,16 +9,15 @@ var isPro = process.env.NODE_ENV === 'production';
 var bundle_name = '[name]_bundle.js';
 var chunk_name = '[name]_chunk.js';
 var index_path = '/index.html';
-var root_path = '/clear';
+var publicPath = '/clear';
 
 
 if (isPro) {
+  index_path = conf.outPutPath + '/index.html';
+  //publicPath = '/clear';
   //bundle_name = '[name]_bundle_[chunkhash].js';
   //chunk_name = '[name]_chunk_[chunkhash].js';
-  index_path = '/dist/index.html';
-  root_path = '/clear';
 }
-
 
 // ***************************** plugins *****************************
 var plugins = [
@@ -28,13 +28,14 @@ var plugins = [
   new webpack.optimize.CommonsChunkPlugin("vendor", bundle_name),
 
   new webpack.DefinePlugin({
-    'process.env': {
+    'process.env': {//React 要用的变量。
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
   }
   }),
+  // create index.html
   new HtmlWebpackPlugin({
     favicon: path.join(__dirname, 'favicon.png'),
-    CONFIG: JSON.stringify({ROOT_PATH : root_path }),
+    CONFIG: JSON.stringify({ROOT_PATH : publicPath }),
     filename: path.join(__dirname, index_path),
     template: path.join(__dirname, '/src/index.ejs')
   })
@@ -58,7 +59,7 @@ if (isPro) { //正式环境下压缩
 module.exports = {
   context: path.join(__dirname, './src'),
   entry: {
-    app: "./app",
+    app: "./app.jsx",
     vendor: [
       'react',
       'react-dom',
@@ -69,8 +70,8 @@ module.exports = {
     ]
   },
   output: {
-    path: './dist',
-    publicPath: '/clear',
+    path: path.join(__dirname, conf.outPutPath),
+    publicPath: publicPath,
     filename: bundle_name,
     chunkFilename: chunk_name
   },
@@ -110,7 +111,7 @@ module.exports = {
   ],
   plugins: plugins,
   devServer: {
-    contentBase: './',
+    contentBase: __dirname,
     hot: true
   }
 };

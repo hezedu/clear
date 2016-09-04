@@ -8,8 +8,9 @@ export default (
       <IndexRoute component={layout.Home}/>
       <Route onEnter={layout.Top.isLogin}>
         <Route path="env" component={layout.Left}>
-          <Route path="about" component={layout.About}/>
+          <Route path="about" component={layout.About} />
         </Route>
+        <Route path="study" component={layout.study}/>
       </Route>
     </Route>
   </Route>

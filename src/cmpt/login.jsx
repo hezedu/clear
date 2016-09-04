@@ -1,5 +1,5 @@
 import { Component} from 'react';
-import { Link } from 'react-router';
+import { Link } from '../lib/hack.jsx';
 import userStore from '../store/user';
 import style from '../css/style.scss';
 import {connect} from 'react-redux';

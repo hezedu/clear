@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Link } from 'react-router';
+import { ClearLink } from '../lib/hack.jsx';
 import style from '../css/style.scss';
 import userStore from '../store/user';
 import {LoginBar} from './login.jsx';
@@ -25,11 +25,11 @@ export class Top extends Component {//出现上导航，容器为：上导航以
     return (
       <div className='height100'>
         <div className={style.topNavWarp}>
-          <Link className={style.title} to="/">Clear</Link>
+          <ClearLink className={style.title} to="/">Home</ClearLink>
           <div className={style.topNav}>
-            <Link to={(this.props.route.path) + '/env'} activeClassName={style.active}>环境</Link>
-            <Link to="React">React</Link>
-            <Link to="cmpt">组件库</Link>
+            <ClearLink to='env' activeClassName={style.active}>环境</ClearLink>
+            <ClearLink to="React">学习</ClearLink>
+            <ClearLink to="cmpt">组件库</ClearLink>
           </div>
           <div className={style.topRightBar}>
           <Provider store={userStore}>
@@ -48,7 +48,7 @@ export class Top extends Component {//出现上导航，容器为：上导航以
   }
 }
 
-export class Home extends Component {
+export class Home extends Component { //默认首页
   render() {
     return (
       <div className={style.homeTitle}>
@@ -62,12 +62,12 @@ export class Home extends Component {
   }
 }
 
-export class Left extends Component {
+export class Left extends Component { //出现左导航，容器为：main。
   render() {
     return (
       <div>
         <div className={style.leftNav}>
-          <Link to={this.props.route.path + '/about'} activeClassName={style.active}>About</Link>
+          <ClearLink to={this.props.route.path + '/about'} activeClassName={style.active}>About</ClearLink>
         </div>
         <div className={style.mainWarp}>
           <div className={style.main}>
@@ -79,10 +79,10 @@ export class Left extends Component {
   }
 }
 
-export class About extends Component {
+export class LeftNav extends Component { //左导航
   render() {
     return (
-      <div>About</div>
+      <ClearLink to={this.props.route.path + '/about'} activeClassName={style.active}>About</ClearLink>
     );
   }
 }

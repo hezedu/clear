@@ -110,6 +110,7 @@ module.exports = {
   ],
   plugins: plugins,
   devServer: {
+    contentBase: './',
     hot: true
   }
 };

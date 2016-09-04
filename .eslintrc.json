@@ -24,7 +24,7 @@
         "no-unused-vars": "warn",
         "no-trailing-spaces": "error",
         "no-multiple-empty-lines": "error",
-        "prefer-const": "error",
+        "prefer-const": "warn",
         "space-infix-ops": "error",
         "camelcase": "error",
         "arrow-parens": "error",

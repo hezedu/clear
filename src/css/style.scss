@@ -12,7 +12,7 @@ $leftAHeight:35px;
   html , body, .height100{height: 100%;}
 }
 
-body{font-family:'微软雅黑';line-height: 1.5}
+body{font-family:"SegoeUI", "Microsoft YaHei", "Hiragino Sans GB";line-height: 1.5}
 ul, ol { list-style: none; }
 a { text-decoration: none;cursor:pointer;}
 a:hover{background: $leftColor}
@@ -29,6 +29,7 @@ hr{border-color: #fff}
    margin: auto; height: 200px;font-size: 30px;}
 .homeTitle big{font-size: 100px;}
 .homeTitle small{font-size: 33px;}
+.homeTitle a{color:$topColor; border-bottom:2px solid $topColor}
 
 .topNavWarp{padding-left: $leftWidth;padding-right: $leftWidth;
   height:$topH;line-height: $topH;position: fixed; top:0;font-size:1.2em;

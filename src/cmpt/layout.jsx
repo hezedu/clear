@@ -1,6 +1,5 @@
 import { Component, PropTypes} from 'react';
 import { ClearLink } from '../lib/hack.jsx';
-import { Link } from 'react-router';
 import style from '../css/style.scss';
 import userStore from '../store/user';
 import {LoginBar} from './login.jsx';
@@ -13,8 +12,10 @@ export class Root extends Component {//出现router
   };
   componentWillMount(){
     clear.router = this.context.router;
+    clear.$root = this.props;
   }
   render() {
+    //console.log('this.props', this.props);
     return this.props.children;
   }
 }
@@ -31,15 +32,15 @@ export class Top extends Component {//出现上导航
         <div className={style.topNavWarp}>
           <ClearLink className={style.title} to="/">Home</ClearLink>
           <div className={style.topNav}>
-            <Link to='env' activeClassName={style.active}>环境</Link>
-            <ClearLink to="study">学习</ClearLink>
-            <ClearLink to="cmpt">组件库</ClearLink>
+            <ClearLink to='./env' activeClassName={style.active}>环境</ClearLink>
+            <ClearLink to="./study" activeClassName={style.active}>学习</ClearLink>
+            <ClearLink to="./cmpt" activeClassName={style.active}>组件库</ClearLink>
           </div>
           <div className={style.topRightBar}>
           <Provider store={userStore}>
             <LoginBar />
           </Provider>
-          <a href='https://github.com/hezedu/clear' target='_blank' className={style.githubIcon}>
+          <a href='https://github.com/hezedu/clear' target="_blank" className={style.githubIcon}>
           <img src={clear.rootPath + '/static/pinned-octocat.svg'} />
           </a>
           </div>

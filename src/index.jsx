@@ -4,10 +4,12 @@ import {createHashHistory} from 'history';
 import AppRoutes from './router.jsx';
 import clear from 'clear';
 
+const history = useRouterHistory(createHashHistory)({queryKey: false});
 const mount = document.getElementById('app');
+
 clear.rootPath = mount.getAttribute('rootpath') || '/';
 
 ReactDOM.render(
-  <Router history={useRouterHistory(createHashHistory)({queryKey: false})} routes={AppRoutes} />,
+    <Router history={history} routes={AppRoutes} />,
   mount
 );

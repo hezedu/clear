@@ -35,13 +35,13 @@ export class LoginBox extends Component {
 class Bar extends Component {
   logout(){
     this.props.dispatch({type: 'logout'});
-    app.router.push('/login');
+    app.router.push('/');
   }
   render() {
     if(!this.props.user){
       return (
         <div className={style.loginBar}>
-          <ClearLink to="/login">登录</ClearLink>
+          <ClearLink to="/login">测试登录</ClearLink>
         </div>
       );
     }

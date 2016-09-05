@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server -d --history-api-fallback --hot --inline --progress --colors --port 4000",
     "build": "webpack --progress --colors",
-    "github_docs": "node script/github_docs"
+    "docs": "node script/github_docs"
   },
   "ignore": [
     "docs"
@@ -24,7 +24,8 @@
     "react-router-redux": "^4.0.5",
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
-    "virgin": "^1.0.1"
+    "virgin": "^1.0.1",
+    "history": "^2.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",

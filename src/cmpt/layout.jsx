@@ -97,7 +97,7 @@ export class Left extends Component { //出现左导航，容器为：main。
   NavList(){
     const key = this.props.route.path;
     const data = find(navRoutes, {path: key}).childRoutes;
-    return tree(data, key);
+    return tree(data, `/${key}`);
   }
   render() {
     return (
@@ -124,11 +124,14 @@ export class About extends Component { //左导航
   }
 }
 
-export class Study extends Component { //左导航
+export class Main extends Component { //左导航
+  loadHtml(){
+    return require(`html!./main${this.props.route.link}.html`);
+  }
   render() {
-    //console.log('this.props.route', this);
+    //-console.log('this.props', this.props);
     return (
-      <Link to={this.props.route.path + '/Study'} activeClassName={style.active}>About</Link>
+      <div dangerouslySetInnerHTML={{__html:this.loadHtml()}}/>
     );
   }
 }

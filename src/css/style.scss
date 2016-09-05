@@ -10,9 +10,16 @@ $leftAHeight:35px;
 *{margin: 0; padding: 0;box-sizing: border-box;}
 :global {
   html , body, .height100{height: 100%;}
+  body{font-family:"SegoeUI", "Microsoft YaHei", "Hiragino Sans GB";line-height: 1.5; font-size: 16px}
+  pre{font-size:16px; background: #eee;font-family: "Courier new";
+    display: inline-block;margin: 0 5px;padding:0 5px;margin-top:10px;}
+    h1{font-size: 100px;text-align: center;line-height: 200px;color: #0050B2}
+    h2{font-size: 50px;text-align: center;color: #0050B2}
+    h3{font-size: 30px;padding-bottom: 20px;}
+    h4{font-size: 20px;padding: 10px 0;color: #0050B2; }
+    .clear{clear:both;}
+    p{line-height: 2}
 }
-
-body{font-family:"SegoeUI", "Microsoft YaHei", "Hiragino Sans GB";line-height: 1.5}
 ul, ol { list-style: none; display: block}
 a { text-decoration: none;cursor:pointer;}
 a:hover{background: $leftColor}
@@ -47,6 +54,9 @@ hr{border-color: #fff}
 
 .mainWarp{padding-left:$leftWidth;width:100%; position: relative; height: 100%;}
 .main{height: 100%;width: 100%;padding:10px}
+.main a{border-bottom: 1px solid #000;}
+.main a:hover{border-bottom: 0;color:$color};
+.main hr{margin: 10px 0;}
 .leftNav{width: $leftWidth;height: 100%;position: fixed;top:$topH;left:0;z-index: 2;padding-top: 10px;
 background-color: $midColor}
 .leftNav a{color:$color;display: block; height: $leftAHeight;

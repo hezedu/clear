@@ -13,8 +13,8 @@ export class Root extends Component {//出现router
   };
   componentWillMount(){
     clear.router = this.context.router;
-    clear.$root = this.props;
-    console.log('routes', clear.$root.routes);
+    // clear.$root = this.props;
+    // console.log('routes', clear.$root.routes);
   }
   render() {
     return this.props.children;
@@ -52,7 +52,7 @@ export class Top extends Component {//出现上导航
             <LoginBar />
           </Provider>
           <a href='https://github.com/hezedu/clear' target="_blank" className={style.githubIcon}>
-          <img src={clear.rootPath + '/static/pinned-octocat.svg'} />
+          <img src={clear.staticPath + '/static/pinned-octocat.svg'} />
           </a>
           </div>
         </div>
@@ -130,5 +130,15 @@ export class Study extends Component { //左导航
     return (
       <Link to={this.props.route.path + '/Study'} activeClassName={style.active}>About</Link>
     );
+  }
+}
+
+export class Error extends Component {//出现router
+  render() {
+    return (<div className={style.homeTitle}>
+            <big>404</big><small>notFound</small>
+            <br/>
+             <Link to='/'>返回首页</Link>
+            </div>);
   }
 }

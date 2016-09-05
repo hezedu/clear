@@ -7,7 +7,7 @@ import clear from 'clear';
 const history = useRouterHistory(createHashHistory)({queryKey: false});
 const mount = document.getElementById('app');
 
-clear.rootPath = mount.getAttribute('rootpath') || '/';
+clear.staticPath = mount.getAttribute('staticpath') || '/';
 
 ReactDOM.render(
     <Router history={history} routes={AppRoutes} />,

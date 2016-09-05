@@ -15,7 +15,7 @@ export const navRoutes = [
 ];
 
 export default {
-  path: clear.rootPath, component: layout.Root,
+  component: layout.Root,
   childRoutes: [
     { path: '/login', component: LoginBox },
     { path: '/', component: layout.Top,
@@ -23,6 +23,7 @@ export default {
       {indexRoute: {component: layout.Home }},
       {path: '/', onEnter:clear.isLogin,
       childRoutes:navRoutes}
-    ]}
+    ]},
+    { path: '*', component: layout.Error}
   ]
 };

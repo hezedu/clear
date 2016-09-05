@@ -9,13 +9,14 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var isPro = process.env.NODE_ENV === 'production';
 var bundle_name = '[name]_bundle.js';
 var chunk_name = '[name]_chunk.js';
-var index_path = '/index.html';
-var publicPath = conf.outPutDir;
+var toIndexPath = '/index.html'; //生成index文件的路径
+var staticPath = conf.outPutDir;
+//var baseUrl = '/';
 
 
 if (isPro) {
-  publicPath = '/clear';
-  index_path = conf.outPutDir + '/index.html';
+  staticPath = '/clear';
+  toIndexPath = conf.outPutDir + '/index.html';
   //bundle_name = '[name]_bundle_[chunkhash].js';
   //chunk_name = '[name]_chunk_[chunkhash].js';
 }
@@ -35,8 +36,8 @@ var plugins = [
   }),
   // create index.html
   new HtmlWebpackPlugin({
-    ROOT_PATH: publicPath,
-    filename: path.join(__dirname, index_path),
+    STATIC_PATH: staticPath,
+    filename: path.join(__dirname, toIndexPath),
     template: path.join(__dirname, '/src/index.ejs')
   })
 ]
@@ -71,7 +72,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, conf.outPutDir , conf.outPutFile),
-    publicPath: publicPath + '/' + conf.outPutFile,
+    publicPath: staticPath + '/' + conf.outPutFile,
     filename: bundle_name,
     chunkFilename: chunk_name
   },

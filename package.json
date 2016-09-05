@@ -15,6 +15,8 @@
   ],
   "author": "",
   "dependencies": {
+    "history": "^2.1.2",
+    "lodash": "^4.15.0",
     "material-ui": "^0.15.4",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
@@ -24,8 +26,7 @@
     "react-router-redux": "^4.0.5",
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
-    "virgin": "^1.0.1",
-    "history": "^2.1.2"
+    "virgin": "^1.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",

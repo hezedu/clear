@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import { Router, useRouterHistory} from 'react-router';
 import {createHashHistory} from 'history';
-import AppRoutes from './router.jsx';
+import AppRoutes from './router.conf';
 import clear from 'clear';
 
 const history = useRouterHistory(createHashHistory)({queryKey: false});

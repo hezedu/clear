@@ -5,7 +5,8 @@ import userStore from '../store/user';
 import {LoginBar} from './login.jsx';
 import {Provider} from 'react-redux';
 import clear from 'clear';
-
+import {navRoutes} from '../router.conf';
+import find from 'lodash/find';
 export class Root extends Component {//出现router
   static contextTypes = {
     router: PropTypes.object.isRequired
@@ -13,18 +14,30 @@ export class Root extends Component {//出现router
   componentWillMount(){
     clear.router = this.context.router;
     clear.$root = this.props;
+    console.log('routes', clear.$root.routes);
   }
   render() {
-    //console.log('this.props', this.props);
     return this.props.children;
   }
 }
 
+clear.isLogin = (nextState, replace)=>{
+  if(!userStore.getState()){
+    replace('/login');
+  }
+};
+
 export class Top extends Component {//出现上导航
-  static isLogin(nextState, replace){
-    if(!userStore.getState()){
-      replace('/login');
-    }
+  NavList(){
+    const arr = [];
+    navRoutes.forEach((v, i) => {
+      const link = `/${v.path}`;
+      // if (!v.link && v.childRoutes && v.childRoutes.length) {
+      //   link = `${link}/${v.childRoutes[0].path}`;
+      // }
+      arr[i] = <Link to={link} key={v.path} activeClassName={style.active}>{v.title}</Link>;
+    });
+    return arr;
   }
   render() {
     return (
@@ -32,9 +45,7 @@ export class Top extends Component {//出现上导航
         <div className={style.topNavWarp}>
           <Link className={style.title} to="/">Home</Link>
           <div className={style.topNav}>
-            <Link to='/env' activeClassName={style.active}>环境</Link>
-            <Link to="/study" activeClassName={style.active}>学习</Link>
-            <Link to="/cmpt" activeClassName={style.active}>组件库</Link>
+            {this.NavList()}
           </div>
           <div className={style.topRightBar}>
           <Provider store={userStore}>
@@ -45,9 +56,7 @@ export class Top extends Component {//出现上导航
           </a>
           </div>
         </div>
-        <div className={style.bottomWarp}>
           {this.props.children}
-        </div>
       </div>
     );
   }
@@ -67,13 +76,35 @@ export class Home extends Component { //默认首页
   }
 }
 
+const tree = (arr, rpath) => {
+  const arr2 = [];
+  arr.forEach((v, i) => {
+    v.link = `${rpath}/${v.path}`;
+    let childRoutes = '';
+    if (v.childRoutes) {
+      childRoutes = <ul>{tree(v.childRoutes, v.link)}</ul>;
+    }
+    arr2[i] = (
+      <li key={v.path}>
+        <Link to={v.link} activeClassName={style.active}>{v.title}</Link>
+        {childRoutes}
+      </li>);
+  });
+  return arr2;
+};
+
 export class Left extends Component { //出现左导航，容器为：main。
+  NavList(){
+    const key = this.props.route.path;
+    const data = find(navRoutes, {path: key}).childRoutes;
+    return tree(data, key);
+  }
   render() {
     return (
-      <div>
-        <div className={style.leftNav}>
-          <Link to={this.props.route.path + '/about'} activeClassName={style.active}>About</Link>
-        </div>
+      <div className={style.bottomWarp}>
+        <ul className={style.leftNav}>
+          {this.NavList()}
+        </ul>
         <div className={style.mainWarp}>
           <div className={style.main}>
             {this.props.children}

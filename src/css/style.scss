@@ -13,7 +13,7 @@ $leftAHeight:35px;
 }
 
 body{font-family:"SegoeUI", "Microsoft YaHei", "Hiragino Sans GB";line-height: 1.5}
-ul, ol { list-style: none; }
+ul, ol { list-style: none; display: block}
 a { text-decoration: none;cursor:pointer;}
 a:hover{background: $leftColor}
 input{padding-left:.5em}
@@ -36,8 +36,8 @@ hr{border-color: #fff}
   left:0;z-index: 2;width: 100%; background-color:$topColor;color:$color;}
 .title{padding:0 10px;left:0;color:$midColor2;position: absolute; display: block;font-size:1.2em;}
 .topNav{padding-left: 20px}
-.topNav a{color:$color; display: block;float: left; margin:0 10px;padding: 0 20px}
-.topNav a.active, .topNav a:hover{background: $leftColor}
+.topNav a{color:$midColor2; display: block;float: left; margin:0 10px;padding: 0 20px}
+.topNav a.active, .topNav a:hover{background: $midColor; color:$color}
 .topRightBar {right:0px;font-size: 16px;position: absolute;color:$midColor2;padding-right:40px;}
 .topRightBar a.githubIcon{float: right;position: absolute;right: 0;top:0;height: 100%;padding:0 5px}
 .topRightBar .githubIcon img{width:30px;height: 30px;vertical-align: middle}
@@ -48,6 +48,9 @@ hr{border-color: #fff}
 .mainWarp{padding-left:$leftWidth;width:100%; position: relative; height: 100%;}
 .main{height: 100%;width: 100%;padding:10px}
 .leftNav{width: $leftWidth;height: 100%;position: fixed;top:$topH;left:0;z-index: 2;padding-top: 10px;
-background-color: $leftColor}
-.leftNav a{color:$topColor;display: block; height: $leftAHeight;line-height: $leftAHeight;padding-left:10px;}
+background-color: $midColor}
+.leftNav a{color:$color;display: block; height: $leftAHeight;
+  line-height: $leftAHeight;padding-left:10px;}
+.leftNav li{display: block;};
+.leftNav ul{margin-left: 1em}
 .leftNav a.active, .leftNav a:hover{background-color: $color;color:$topColor}

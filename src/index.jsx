@@ -3,6 +3,7 @@ import { Router, useRouterHistory} from 'react-router';
 import {createHashHistory} from 'history';
 import AppRoutes from './router.conf';
 import clear from 'clear';
+require('./lib/hack.jsx');
 
 const history = useRouterHistory(createHashHistory)({queryKey: false});
 const mount = document.getElementById('app');

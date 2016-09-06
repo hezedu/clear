@@ -12,6 +12,9 @@ export class Root extends Component {//出现router
   static contextTypes = {
     router: PropTypes.object.isRequired
   };
+  getChildContext(){
+    return {parentPath : ''};
+  }
   componentWillMount(){
     clear.router = this.context.router;
     // clear.$root = this.props;
@@ -101,6 +104,7 @@ export class Left extends Component { //出现左导航，容器为：main。
     return tree(data, `/${key}`);
   }
   render() {
+    console.log('this.context', this.props);
     return (
       <div className={style.bottomWarp}>
         <ul className={style.leftNav}>

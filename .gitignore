@@ -1,3 +1,4 @@
-/sas/*.db
+/*.db
 /node_modules
 /dist
+/docs/dev_dist

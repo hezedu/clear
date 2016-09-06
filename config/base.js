@@ -1,10 +1,7 @@
-const conf = {
+module.exports = {
   baseUrl: '',
-  staticPath : '',
+  staticPath : '/docs',
+  webpack: {
+    indexDir: './'
+  }
 };
-
-conf.webpack = {
-  distDir: './docs'
-};
-
-module.exports = conf;

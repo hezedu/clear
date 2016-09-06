@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import clear from 'clear';
 import {navRoutes} from '../router.conf';
 import find from 'lodash/find';
+
 export class Root extends Component {//出现router
   static contextTypes = {
     router: PropTypes.object.isRequired

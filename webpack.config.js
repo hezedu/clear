@@ -10,9 +10,14 @@ var isPro = process.env.NODE_ENV === 'production';
 var bundleName = '[name]_bundle.js';
 var chunkName = '[name]_chunk.js';
 var baseStatic = conf.baseUrl + conf.staticPath;
-var distPath = path.join(__dirname, conf.webpack.distDir + '/dist');
-console.log('distPath', distPath);
-var publicPath = baseStatic + '/dist';
+
+var distFileName = 'dev_dist';
+if (isPro) {
+  distFileName = 'dist';
+}
+var outputPath = path.join(__dirname, conf.webpack.indexDir + conf.staticPath + '/' + distFileName);
+console.log('outputPath', outputPath);
+var publicPath = baseStatic + '/' + distFileName;
 
 // ***************************** plugins *****************************
 var plugins = [
@@ -28,7 +33,7 @@ var plugins = [
   }),
   // create index.html
   new HtmlWebpackPlugin({
-    filename: path.join(__dirname, conf.webpack.distDir + '/index.html'),
+    filename: path.join(__dirname, conf.webpack.indexDir + '/index.html'),
     template: path.join(__dirname, '/src/index.ejs'),
     //tpl option
     baseStatic,
@@ -64,7 +69,7 @@ module.exports = {
     ]
   },
   output: {
-    path: distPath,
+    path: outputPath,
     publicPath,
     filename: bundleName,
     chunkFilename: chunkName
@@ -108,7 +113,7 @@ module.exports = {
   ],
   plugins: plugins,
   devServer: {
-    contentBase: './',
+    contentBase: path.join(__dirname, ''),
     hot: true
   }
 };

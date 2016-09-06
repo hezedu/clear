@@ -8,9 +8,7 @@ const history = useRouterHistory(createHashHistory)({queryKey: false});
 const mount = document.getElementById('app');
 
 clear.baseStatic = mount.getAttribute('base-static');//静态文件path.
-console.log('clear.baseStatic', clear.baseStatic);
 
 ReactDOM.render(
-    <Router history={history} routes={AppRoutes} />,
-  mount
+  <Router history={history} routes={AppRoutes} />,mount
 );

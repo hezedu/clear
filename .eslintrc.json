@@ -36,7 +36,7 @@
             "single"
         ],
         "semi": [
-            "error",
+            "warn",
             "always"
         ],
         "react/jsx-uses-vars": "error"

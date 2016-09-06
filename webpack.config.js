@@ -1,25 +1,15 @@
 var path = require('path');
-var conf = require('./script/conf');
 var rucksack = require('rucksack-css');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
+var conf = require('./config/' + (process.env.NODE_ENV || 'base'));
 
-
-var isPro = process.env.NODE_ENV === 'production';
-var bundle_name = '[name]_bundle.js';
-var chunk_name = '[name]_chunk.js';
-var toIndexPath = '/index.html'; //生成index文件的路径
-var staticPath = conf.outPutDir;
-//var baseUrl = '/';
-
-
-if (isPro) {
-  staticPath = '/clear';
-  toIndexPath = conf.outPutDir + '/index.html';
-  //bundle_name = '[name]_bundle_[chunkhash].js';
-  //chunk_name = '[name]_chunk_[chunkhash].js';
-}
+var bundleName = '[name]_bundle.js';
+var chunkName = '[name]_chunk.js';
+var publicPath = conf.baseUrl + conf.staticPath;
+var distPath = publicPath + '/dist';
 
 // ***************************** plugins *****************************
 var plugins = [
@@ -27,8 +17,7 @@ var plugins = [
   new webpack.ProvidePlugin({
     React : 'react'
   }),
-  new webpack.optimize.CommonsChunkPlugin("vendor", bundle_name),
-
+  new webpack.optimize.CommonsChunkPlugin("vendor", bundleName),//提取公共模块
   new webpack.DefinePlugin({
     'process.env': {//React 要用的变量。
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
@@ -36,13 +25,14 @@ var plugins = [
   }),
   // create index.html
   new HtmlWebpackPlugin({
-    STATIC_PATH: staticPath,
-    filename: path.join(__dirname, toIndexPath),
-    template: path.join(__dirname, '/src/index.ejs')
+    filename: path.join(__dirname, conf.webpack.indexFile),
+    template: path.join(__dirname, '/src/index.ejs'),
+    //tpl option
+    publicPath,
   })
 ]
 
-if (isPro) { //正式环境下压缩
+if (conf.webpack.uglify) { //正式环境下压缩
   plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -71,10 +61,10 @@ module.exports = {
     ]
   },
   output: {
-    path: path.join(__dirname, conf.outPutDir , conf.outPutFile),
-    publicPath: staticPath + '/' + conf.outPutFile,
-    filename: bundle_name,
-    chunkFilename: chunk_name
+    path: distPath,
+    publicPath,
+    filename: bundleName,
+    chunkFilename: chunkName
   },
   module: {
     preLoaders: [

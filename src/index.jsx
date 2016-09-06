@@ -7,7 +7,7 @@ import clear from 'clear';
 const history = useRouterHistory(createHashHistory)({queryKey: false});
 const mount = document.getElementById('app');
 
-clear.publicPath = mount.getAttribute('public-path');//静态文件path.
+clear.baseStatic = mount.getAttribute('public-path');//静态文件path.
 
 ReactDOM.render(
     <Router history={history} routes={AppRoutes} />,

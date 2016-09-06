@@ -8,8 +8,8 @@ var conf = require('./config/' + (process.env.NODE_ENV || 'base'));
 
 var bundleName = '[name]_bundle.js';
 var chunkName = '[name]_chunk.js';
-var publicPath = conf.baseUrl + conf.staticPath;
-var distPath = publicPath + '/dist';
+var baseStatic = conf.baseUrl + conf.staticPath;
+var distPath = baseStatic + '/dist';
 
 // ***************************** plugins *****************************
 var plugins = [
@@ -28,7 +28,7 @@ var plugins = [
     filename: path.join(__dirname, conf.webpack.indexFile),
     template: path.join(__dirname, '/src/index.ejs'),
     //tpl option
-    publicPath,
+    baseStatic,
   })
 ]
 
@@ -62,7 +62,7 @@ module.exports = {
   },
   output: {
     path: distPath,
-    publicPath,
+    publicPath: distPath,
     filename: bundleName,
     chunkFilename: chunkName
   },

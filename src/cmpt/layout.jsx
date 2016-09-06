@@ -52,7 +52,7 @@ export class Top extends Component {//出现上导航
             <LoginBar />
           </Provider>
           <a href='https://github.com/hezedu/clear' target="_blank" className={style.githubIcon}>
-          <img src={clear.publicPath + '/static/pinned-octocat.svg'} />
+          <img src={clear.baseStatic + '/static/pinned-octocat.svg'} />
           </a>
           </div>
         </div>

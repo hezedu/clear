@@ -2,7 +2,7 @@ var _ = require('lodash');
 var base = require('./base');
 
 const conf = {
-  staticPath : '/',
+  staticPath : '',
   baseUrl: '/clear',
 };
 

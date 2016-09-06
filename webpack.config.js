@@ -5,11 +5,14 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
 var conf = require('./config/' + (process.env.NODE_ENV || 'base'));
+var isPro = process.env.NODE_ENV === 'production';
 
 var bundleName = '[name]_bundle.js';
 var chunkName = '[name]_chunk.js';
 var baseStatic = conf.baseUrl + conf.staticPath;
-var distPath = baseStatic + '/dist';
+var distPath = path.join(__dirname, conf.webpack.distDir + '/dist');
+console.log('distPath', distPath);
+var publicPath = baseStatic + '/dist';
 
 // ***************************** plugins *****************************
 var plugins = [
@@ -25,14 +28,14 @@ var plugins = [
   }),
   // create index.html
   new HtmlWebpackPlugin({
-    filename: path.join(__dirname, conf.webpack.indexFile),
+    filename: path.join(__dirname, conf.webpack.distDir + '/index.html'),
     template: path.join(__dirname, '/src/index.ejs'),
     //tpl option
     baseStatic,
   })
 ]
 
-if (conf.webpack.uglify) { //正式环境下压缩
+if (isPro) { //正式环境下压缩
   plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -62,7 +65,7 @@ module.exports = {
   },
   output: {
     path: distPath,
-    publicPath: distPath,
+    publicPath,
     filename: bundleName,
     chunkFilename: chunkName
   },

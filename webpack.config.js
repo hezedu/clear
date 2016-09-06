@@ -16,7 +16,6 @@ if (isPro) {
   distFileName = 'dist';
 }
 var outputPath = path.join(__dirname, conf.webpack.indexDir + conf.staticPath + '/' + distFileName);
-console.log('outputPath', outputPath);
 var publicPath = baseStatic + '/' + distFileName;
 
 // ***************************** plugins *****************************
@@ -29,7 +28,8 @@ var plugins = [
   new webpack.DefinePlugin({
     'process.env': {//React 要用的变量。
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
-  }
+    },
+    clearTest : JSON.stringify({BASE_URL: conf.baseUrl, BASE_STATIC: baseStatic})
   }),
   // create index.html
   new HtmlWebpackPlugin({

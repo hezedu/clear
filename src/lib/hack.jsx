@@ -1,10 +1,52 @@
-class test{
-  constructor(msg){
-    this.msg = msg;
+
+import React, { Component , PropTypes} from 'react';
+import { Link , Router} from 'react-router';
+import clear from 'clear';
+const clearTest = typeof clearTest !== 'undefined' ? clearTest : '';
+console.log('clearTest', clearTest.length, (typeof clearTest));
+export class Root extends Component {
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
+  componentWillMount(){
+    clear.router = this.context.router;
+  }
+  render() {
+    return this.props.children;
   }
 }
-console.log('test.constructor', test.constructor);
-console.log('prototype.constructor', test.prototype.constructor);
+
+export class ClearRouter extends Router {
+
+}
+
+Root.childContextTypes =
+Root.contextTypes =
+ClearRouter.childContextTypes =
+ClearRouter.contextTypes =
+  {parentPath: React.PropTypes.string};
+
+Root.prototype.getChildContext =
+ClearRouter.prototype.getChildContext =
+  () => {
+    var path = this.props.route.path || '';
+    if(path){
+      if(path[0] !== '/'){
+        path = '/' + path;
+      }
+      const len = path.length;
+      if(path[len - 1] === '/'){
+        path = path.substr(0, len - 1);
+      }
+    }
+    return {parentPath : this.context.parentPath + path};
+  };
+
+
+export class ClearLink extends Link {
+
+}
+
 // const multipleInher = (c1, c2) => {
 //   class tmp{};
 // }

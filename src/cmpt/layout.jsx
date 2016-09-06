@@ -12,9 +12,9 @@ export class Root extends Component {//出现router
   static contextTypes = {
     router: PropTypes.object.isRequired
   };
-  getChildContext(){
-    return {parentPath : ''};
-  }
+  // getChildContext(){
+  //   return {parentPath : ''};
+  // }
   componentWillMount(){
     clear.router = this.context.router;
     // clear.$root = this.props;

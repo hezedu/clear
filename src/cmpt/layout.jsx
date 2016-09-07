@@ -4,7 +4,7 @@ import style from '../css/style.scss';
 import userStore from '../store/user';
 import {LoginBar} from './login.jsx';
 import {Provider} from 'react-redux';
-
+import NavTree from './tree.jsx';
 import clear from 'clear';
 import {navRoutes} from '../router.conf';
 import find from 'lodash/find';
@@ -23,7 +23,7 @@ export class Root extends Component {//出现router
   }
 }
 
-clear.isLogin = (nextState, replace)=>{
+clear.isLogin = (nextState, replace) => {
   if(!userStore.getState()){
     replace('/login');
   }
@@ -34,9 +34,6 @@ export class Top extends Component {//出现上导航
     const arr = [];
     navRoutes.forEach((v, i) => {
       const link = `/${v.path}`;
-      // if (!v.link && v.childRoutes && v.childRoutes.length) {
-      //   link = `${link}/${v.childRoutes[0].path}`;
-      // }
       arr[i] = <Link to={link} key={v.path} activeClassName={style.active}>{v.title}</Link>;
     });
     return arr;
@@ -101,11 +98,21 @@ export class Left extends Component { //出现左导航，容器为：main。
     const data = find(navRoutes, {path: key}).childRoutes;
     return tree(data, `/${key}`);
   }
+  componentWillMount(){
+    console.log('componentWillMount');
+    const key = this.props.route.path;
+    this.setState({
+      rootPath: key,
+      routes: find(navRoutes, {path: key}).childRoutes
+    });
+  }
   render() {
+    console.log('render');
     return (
       <div className={style.bottomWarp}>
         <ul className={style.leftNav}>
-          {this.NavList()}
+          {/*this.NavList()*/}
+          <NavTree {...this.state} />
         </ul>
         <div className={style.mainWarp}>
           <div className={style.main}>

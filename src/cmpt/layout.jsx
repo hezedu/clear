@@ -4,21 +4,19 @@ import style from '../css/style.scss';
 import userStore from '../store/user';
 import {LoginBar} from './login.jsx';
 import {Provider} from 'react-redux';
+
 import clear from 'clear';
 import {navRoutes} from '../router.conf';
 import find from 'lodash/find';
 
 export class Root extends Component {//出现router
   static contextTypes = {
-    router: PropTypes.object.isRequired
+    router: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
   };
-  // getChildContext(){
-  //   return {parentPath : ''};
-  // }
   componentWillMount(){
     clear.router = this.context.router;
-    // clear.$root = this.props;
-    // console.log('routes', clear.$root.routes);
+    clear.location = this.context.location;
   }
   render() {
     return this.props.children;
@@ -56,7 +54,7 @@ export class Top extends Component {//出现上导航
             <LoginBar />
           </Provider>
           <a href='https://github.com/hezedu/clear' target="_blank" className={style.githubIcon}>
-          <img src={clear.baseStatic + '/static/pinned-octocat.svg'} />
+          <img src={clear.BASE_STATIC + '/static/pinned-octocat.svg'} />
           </a>
           </div>
         </div>
@@ -104,7 +102,6 @@ export class Left extends Component { //出现左导航，容器为：main。
     return tree(data, `/${key}`);
   }
   render() {
-    console.log('this.context', this.props);
     return (
       <div className={style.bottomWarp}>
         <ul className={style.leftNav}>
@@ -120,11 +117,17 @@ export class Left extends Component { //出现左导航，容器为：main。
   }
 }
 
-export class About extends Component { //左导航
+export class About extends Component {
   render() {
     //console.log('this.props.route', this);
-    return (
-      <Link to={this.props.route.path + '/about'} activeClassName={style.active}>About</Link>
+    return (<div>
+      <Link to={this.props.route.path + '/about'} activeClassName={style.active}>
+      this.props.route.path: {this.props.route.path}
+      </Link>
+      <br/>
+      <Link to='about' activeClassName={style.active}>
+      </Link>
+      </div>
     );
   }
 }

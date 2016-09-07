@@ -28,15 +28,15 @@ var plugins = [
   new webpack.DefinePlugin({
     'process.env': {//React 要用的变量。
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
-    },
-    clearTest : JSON.stringify({BASE_URL: conf.baseUrl, BASE_STATIC: baseStatic})
+    }
   }),
   // create index.html
   new HtmlWebpackPlugin({
     filename: path.join(__dirname, conf.webpack.indexDir + '/index.html'),
     template: path.join(__dirname, '/src/index.ejs'),
     //tpl option
-    baseStatic,
+    baseUrl:conf.baseUrl,
+    baseStatic
   })
 ]
 

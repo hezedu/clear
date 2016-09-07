@@ -9,7 +9,8 @@ import clear from 'clear';
 import {navRoutes} from '../router.conf';
 import find from 'lodash/find';
 
-export class Root extends Component {//出现router
+//======================router======================
+export class Root extends Component {
   static contextTypes = {
     router: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired
@@ -23,18 +24,18 @@ export class Root extends Component {//出现router
   }
 }
 
-clear.isLogin = (nextState, replace) => {
-  if(!userStore.getState()){
-    replace('/login');
-  }
-};
-
-export class Top extends Component {//出现上导航
+// clear.isLogin = (nextState, replace) => {
+//   if(!userStore.getState()){
+//     replace('/login');
+//   }
+// };
+//======================上导航======================
+export class Top extends Component {
   NavList(){
     const arr = [];
     navRoutes.forEach((v, i) => {
-      const link = `/${v.path}`;
-      arr[i] = <Link to={link} key={v.path} activeClassName={style.active}>{v.title}</Link>;
+      v.path = v.path[0] !== '/' ? `/${v.path}` : v.path;
+      arr[i] = <Link to={v.path} key={v.path} activeClassName={style.active}>{v.title}</Link>;
     });
     return arr;
   }
@@ -61,7 +62,8 @@ export class Top extends Component {//出现上导航
   }
 }
 
-export class Home extends Component { //默认首页
+//======================默认首页======================
+export class Home extends Component {
   render() {
     return (
       <div className={style.homeTitle}>
@@ -92,7 +94,8 @@ const tree = (arr, rpath) => {
   return arr2;
 };
 
-export class Left extends Component { //出现左导航，容器为：main。
+//======================左导航======================
+export class Left extends Component {
   NavList(){
     const key = this.props.route.path;
     const data = find(navRoutes, {path: key}).childRoutes;
@@ -124,39 +127,38 @@ export class Left extends Component { //出现左导航，容器为：main。
   }
 }
 
-export class About extends Component {
+//======================主展示区======================
+export class Main extends Component {
+  loadHtml(){
+    console.log('test');
+    //return require(`html!./main${this.props.route.link}.html`);
+  }
+  state = {
+    html:''
+  }
+  componentWillMount(){
+    var that = this;
+    require([`html!./main${that.props.route.link}.html`], function(html){
+      that.setState({html});
+    });
+  }
   render() {
-    //console.log('this.props.route', this);
-    return (<div>
-      <Link to={this.props.route.path + '/about'} activeClassName={style.active}>
-      this.props.route.path: {this.props.route.path}
-      </Link>
-      <br/>
-      <Link to='about' activeClassName={style.active}>
-      </Link>
+    return (
+      <div dangerouslySetInnerHTML={{__html:this.state.html}}/>
+    );
+  }
+}
+
+//======================错误页（目前仅支持404）======================
+export class Error extends Component {//router
+  render() {
+    return (
+      <div className={style.homeTitle}>
+        <big>404</big>
+        <small>notFound</small>
+        <br/>
+        <Link to='/'>返回首页</Link>
       </div>
     );
-  }
-}
-
-export class Main extends Component { //左导航
-  loadHtml(){
-    return require(`html!./main${this.props.route.link}.html`);
-  }
-  render() {
-    //-console.log('this.props', this.props);
-    return (
-      <div dangerouslySetInnerHTML={{__html:this.loadHtml()}}/>
-    );
-  }
-}
-
-export class Error extends Component {//出现router
-  render() {
-    return (<div className={style.homeTitle}>
-            <big>404</big><small>notFound</small>
-            <br/>
-             <Link to='/'>返回首页</Link>
-            </div>);
   }
 }

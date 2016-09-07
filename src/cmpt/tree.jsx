@@ -27,7 +27,7 @@ const tree = (arr, rpath) => {
     }
     arr2[i] = (
       <li key={v.path}>
-        <Link to={v.link} activeClassName={style.active}>{v.title}</Link>
+        <Link to={v.link} activeClassName={style.active} onlyActiveOnIndex={true}>{v.title}</Link>
         {childRoutes}
       </li>);
   });

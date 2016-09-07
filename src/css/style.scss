@@ -62,5 +62,5 @@ background-color: $midColor}
 .leftNav a{color:$color;display: block; height: $leftAHeight;
   line-height: $leftAHeight;padding-left:10px;}
 .leftNav li{display: block;};
-.leftNav ul{margin-left: 1em}
+.leftNav>ul ul{margin-left: 1em}
 .leftNav a.active, .leftNav a:hover{background-color: $color;color:$topColor}

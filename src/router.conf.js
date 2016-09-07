@@ -1,18 +1,20 @@
 //import clear from 'clear';
 import * as layout from './cmpt/layout.jsx';
 import {LoginBox} from './cmpt/login.jsx';
+import { About } from './cmpt/about.jsx';
 //-import * as env from './cmpt/main/env.jsx';
 
 export const navRoutes = [
-  {path: 'env', component: layout.Left, title: '环境',
+  {path: '/doc', component: layout.Left, title: '文档',
     childRoutes:[
       {path: 'start', component: layout.Main, title: '开始',
-      childRoutes:[
-        {path: 'about2', component: layout.About, title: 'test'}
-      ]},
-      {path: 'css', component: layout.About, title: 'css'}
+        childRoutes:[
+          {path: 'about2', component: About, title: 'test'}
+        ]},
+      {path: 'css', component: About, title: 'css'},
+      {path: 'standard', component: About, title: '规范'}
     ]},
-  {path: 'study', component: layout.study, title: '文档'},
+  {path: '/test', component: layout.study, title: 'test'}
 ];
 
 export default {

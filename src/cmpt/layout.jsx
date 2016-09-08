@@ -69,9 +69,12 @@ export class Home extends Component {
       <div className={style.homeTitle}>
         <big>Clear</big><small>前端架构</small>
         <br/>
-        webpack + sass + possCss
-         + <a href='https://github.com/reactjs/react-router/tree/master/docs'>react-router</a>
-         + react + redux
+        <a href='http://webpack.github.io/docs/' target='_blank'>webpack</a>
+         + <a href='http://sass-lang.com/documentation/file.SASS_REFERENCE.html#css_extensions' target='_blank'>sass</a>
+         + <a href='http://simplaio.github.io/rucksack/docs/#autoprefixing' target='_blank'>possCss</a>
+         + <a href='https://github.com/reactjs/react-router' target='_blank'>react-router</a>
+         + <a href='https://facebook.github.io/react/docs/getting-started.html' target='_blank'>react</a>
+         + <a href='http://redux.js.org/index.html' target='_blank'>redux</a>
         </div>
     );
   }
@@ -102,7 +105,6 @@ export class Left extends Component {
     return tree(data, `/${key}`);
   }
   componentWillMount(){
-    console.log('componentWillMount');
     const key = this.props.route.path;
     this.setState({
       rootPath: key,
@@ -110,7 +112,6 @@ export class Left extends Component {
     });
   }
   render() {
-    console.log('render');
     return (
       <div className={style.bottomWarp}>
         <ul className={style.leftNav}>
@@ -137,12 +138,14 @@ export class Main extends Component {
     html:''
   }
   componentWillMount(){
+    //console.log('componentWillMount');
     var that = this;
     require([`html!./main${that.props.route.link}.html`], function(html){
       that.setState({html});
     });
   }
   render() {
+    //console.log('render');
     return (
       <div dangerouslySetInnerHTML={{__html:this.state.html}}/>
     );

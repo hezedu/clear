@@ -12,7 +12,6 @@ export default class extends Component {
     rootPath: PropTypes.optionalString
   }
   render(){
-    console.log('this.props', this.props);
     return <ul>{tree(this.props.routes, this.props.rootPath)}</ul>;
   }
 }

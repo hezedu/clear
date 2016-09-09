@@ -16,14 +16,14 @@ $leftAHeight:35px;
     h1{font-size: 100px;text-align: center;line-height: 200px;color: $topColor;}
     h2{font-size: 50px;text-align: center;color: #0050B2}
     h3{font-size: 30px;padding: 10px 0;}
-    h4{font-size: 20px;padding: 10px 0;color: #0050B2; }
+    h4{padding:5px 0;font-size: 1.2em}
     b{padding:0 2px;font-size: 1.2em}
     .clear{clear:both;}
-    p{line-height: 1.6}
+    p{line-height: 1.5;margin-bottom: 16px;}
     .note{color:$leftColor}
 }
 ul, ol { list-style: none; display: block}
-a { text-decoration: none;cursor:pointer;}
+a { text-decoration: none;cursor:pointer;  color: #4078c0;}
 a:hover{background: $leftColor}
 input{padding-left:.5em}
 hr{border-color: #fff}
@@ -56,7 +56,6 @@ hr{border-color: #fff}
 
 .mainWarp{padding-left:$leftWidth;width:100%; position: relative; height: 100%;}
 .main{height: 100%;width: 100%;padding:10px; padding-left:20px;}
-.main a{border-bottom: 1px solid #000;}
 .main a:hover{border-bottom: 0;color:$color};
 .main hr{margin: 10px 0;}
 .leftNav{width: $leftWidth;height: 100%;position: fixed;top:$topH;left:0;z-index: 2;padding-top: 10px;

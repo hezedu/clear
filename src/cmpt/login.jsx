@@ -3,17 +3,23 @@ import { Link } from 'react-router';
 import userStore from '../store/user';
 import style from '../css/style.scss';
 import {connect} from 'react-redux';
-import app from 'clear';
+import clear from 'clear';
 const testData = {
   id:1,
   name: 'dw'
+};
+
+clear.isLogin = (nextState, replace) => {
+  if(!userStore.getState()){
+    replace('/login');
+  }
 };
 
 export class LoginBox extends Component {
   state = testData;
   submit(){
     userStore.dispatch({type: 'login', data: this.state});
-    app.router.push('/');
+    clear.router.push('/');
   }
   setName(event){
     this.setState({name: event.target.value});
@@ -35,7 +41,7 @@ export class LoginBox extends Component {
 class Bar extends Component {
   logout(){
     this.props.dispatch({type: 'logout'});
-    app.router.push('/');
+    clear.router.push('/');
   }
   render() {
     if(!this.props.user){

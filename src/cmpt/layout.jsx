@@ -17,25 +17,33 @@ export class Root extends Component {
   };
   componentWillMount(){
     clear.router = this.context.router;
-    clear.location = this.context.location;
+    clear.location = this.props.location;
   }
   render() {
+    //console.log('render');
     return this.props.children;
   }
 }
 
-// clear.isLogin = (nextState, replace) => {
-//   if(!userStore.getState()){
-//     replace('/login');
-//   }
-// };
+
 //======================上导航======================
+function topNavOnEnter (nextState, replace){
+  replace(this.IndexRedirect);
+}
 export class Top extends Component {
   NavList(){
     const arr = [];
     navRoutes.forEach((v, i) => {
-      v.path = v.path[0] !== '/' ? `/${v.path}` : v.path;
-      arr[i] = <Link to={v.path} key={v.path} activeClassName={style.active}>{v.title}</Link>;
+      if(v.path){
+        v.path = v.path[0] !== '/' ? `/${v.path}` : v.path;
+        if(typeof v.firstChildIndex && v.childRoutes && v.childRoutes[0]){
+          v.indexRoute = {
+            IndexRedirect : v.path + '/' + (v.childRoutes[0].path || ''),
+            onEnter : topNavOnEnter
+          };
+        }
+        arr.push(<Link to={v.path} key={v.path + i} activeClassName={style.active}>{v.title}</Link>);
+      }
     });
     return arr;
   }
@@ -72,7 +80,7 @@ export class Home extends Component {
         <a href='http://webpack.github.io/docs/' target='_blank'>webpack</a>
          + <a href='http://sass-lang.com/documentation/file.SASS_REFERENCE.html#css_extensions' target='_blank'>sass</a>
          + <a href='http://simplaio.github.io/rucksack/docs/#autoprefixing' target='_blank'>possCss</a>
-         + <a href='https://github.com/reactjs/react-router' target='_blank'>react-router</a>
+         + <a href='https://github.com/reactjs/react-router/tree/master/docs' target='_blank'>react-router</a>
          + <a href='https://facebook.github.io/react/docs/getting-started.html' target='_blank'>react</a>
          + <a href='http://redux.js.org/index.html' target='_blank'>redux</a>
         </div>
@@ -80,43 +88,21 @@ export class Home extends Component {
   }
 }
 
-const tree = (arr, rpath) => {
-  const arr2 = [];
-  arr.forEach((v, i) => {
-    v.link = `${rpath}/${v.path}`;
-    let childRoutes = '';
-    if (v.childRoutes) {
-      childRoutes = <ul>{tree(v.childRoutes, v.link)}</ul>;
-    }
-    arr2[i] = (
-      <li key={v.path}>
-        <Link to={v.link} activeClassName={style.active}>{v.title}</Link>
-        {childRoutes}
-      </li>);
-  });
-  return arr2;
-};
-
 //======================左导航======================
 export class Left extends Component {
-  NavList(){
+  mountNav(){
     const key = this.props.route.path;
-    const data = find(navRoutes, {path: key}).childRoutes;
-    return tree(data, `/${key}`);
-  }
-  componentWillMount(){
-    const key = this.props.route.path;
-    this.setState({
+    const prop = {
       rootPath: key,
-      routes: find(navRoutes, {path: key}).childRoutes
-    });
+      list: find(navRoutes, {path: key}).childRoutes
+    };
+    return <NavTree {...prop} />;
   }
   render() {
     return (
       <div className={style.bottomWarp}>
         <ul className={style.leftNav}>
-          {/*this.NavList()*/}
-          <NavTree {...this.state} />
+          {this.mountNav()}
         </ul>
         <div className={style.mainWarp}>
           <div className={style.main}>
@@ -131,23 +117,15 @@ export class Left extends Component {
 //======================主展示区======================
 export class Main extends Component {
   loadHtml(){
-    console.log('test');
-    //return require(`html!./main${this.props.route.link}.html`);
-  }
-  state = {
-    html:''
-  }
-  componentWillMount(){
-    //console.log('componentWillMount');
-    var that = this;
-    require([`html!./main${that.props.route.link}.html`], function(html){
-      that.setState({html});
-    });
+    const path = this.props.filePath || this.props.route.link;
+    return require(`./main${path}.html`);
   }
   render() {
-    //console.log('render');
+    if(this.props.children){
+      return this.props.children;
+    }
     return (
-      <div dangerouslySetInnerHTML={{__html:this.state.html}}/>
+      <div dangerouslySetInnerHTML={{__html:this.loadHtml()}}/>
     );
   }
 }

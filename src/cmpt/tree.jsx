@@ -4,7 +4,7 @@ import style from '../css/style.scss';
 
 export default class extends Component {
   state = {
-    routes:[],
+    list:[],
     rootPath:''
   };
   static PropTypes = {
@@ -12,7 +12,8 @@ export default class extends Component {
     rootPath: PropTypes.optionalString
   }
   render(){
-    return <ul>{tree(this.props.routes, this.props.rootPath)}</ul>;
+    //console.log('this.props', this.props);
+    return <ul>{tree(this.props.list, this.props.rootPath)}</ul>;
   }
 }
 
@@ -20,6 +21,7 @@ const tree = (arr, rpath) => {
   const arr2 = [];
   arr.forEach((v, i) => {
     v.link = `${rpath}/${v.path}`;
+    //let target = '';
     let childRoutes = '';
     if (v.childRoutes) {
       childRoutes = <ul>{tree(v.childRoutes, v.link)}</ul>;

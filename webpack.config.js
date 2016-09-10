@@ -90,12 +90,11 @@ module.exports = {
         'react-hot',
         'babel-loader'
       ]
-    },{
-      test: /\.html$/,
-      loaders: [
-        'html'
-      ]
-    }, {
+    },
+    {test: /\.md$/, loaders: ['html', 'markdown']},
+    {test: /\.css$/, loaders: ['style', 'css']},
+    {test: /\.html$/,loaders: ['html']},
+     {
       test: /\.scss$/,
       loaders: [
         "style",

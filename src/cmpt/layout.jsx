@@ -1,4 +1,5 @@
 import { Component, PropTypes} from 'react';
+import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import style from '../css/style.scss';
 import userStore from '../store/user';
@@ -115,17 +116,27 @@ export class Left extends Component {
 }
 
 //======================主展示区======================
+const hljs = require('highlight.js');
+
+require('github-markdown-css');
+require('highlight.js/styles/github.css');
 export class Main extends Component {
   loadHtml(){
     const path = this.props.filePath || this.props.route.link;
-    return require(`./main${path}.html`);
+    const html = require(`./main${path}.md`);
+    return html;
+  }
+  //state = { html:'' }
+  componentDidMount(){
+    console.log(ReactDOM.findDOMNode(this));
+    hljs.initHighlighting();
   }
   render() {
     if(this.props.children){
       return this.props.children;
     }
     return (
-      <div dangerouslySetInnerHTML={{__html:this.loadHtml()}}/>
+      <div className='markdown-body' dangerouslySetInnerHTML={{__html:this.loadHtml()}}/>
     );
   }
 }

@@ -1,7 +1,7 @@
 //import clear from 'clear';
 import * as layout from './cmpt/layout.jsx';
 import {LoginBox} from './cmpt/login.jsx';
-import * as test from './cmpt/main/test/index.jsx';
+import * as test from './cmpt/test/index.jsx';
 import Pit from './cmpt/pit.jsx';
 
 export const navRoutes = [

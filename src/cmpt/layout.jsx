@@ -20,7 +20,6 @@ export class Root extends Component {
     clear.location = this.props.location;
   }
   render() {
-    //console.log('render');
     return this.props.children;
   }
 }
@@ -126,7 +125,7 @@ require('highlight.js/lib/languages/css');
 export class Main extends Component {
   loadHtml(){
     const path = this.props.filePath || this.props.route.link;
-    const html = require(`./main${path}.md`);
+    const html = require(`../md${path}.md`);
     return html;
   }
   //state = { html:'' }

@@ -26,7 +26,7 @@ export const navRoutes = [
         //  {path: 'dynamic_routing', getComponents, title: '动态路由'},
         ]},
     ]},
-    {path: 'pit', component: Pit, title: '坑' }
+    {path: 'pit', component: Pit, title: '注意事项' }
 ];
 
 export default {

@@ -8,7 +8,7 @@
 ### cnpm
 
 国内用户建议安装
-```
+```default
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
 然后用`cnpm`用来替换下面的`npm`

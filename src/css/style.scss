@@ -26,7 +26,7 @@ $leftAHeight:35px;
     .clear-tree-node{padding-left:10px;color:$midColor2;height: 35px;line-height: 35px}
 }
 ul, ol { list-style: none; display: block}
-a { text-decoration: none;cursor:pointer;  color: #4078c0;}
+a { text-decoration: none;cursor:pointer;}
 input{padding-left:.5em}
 hr{border-color: #fff}
 .btn{padding:5px 10px;cursor: pointer}
@@ -45,6 +45,7 @@ hr{border-color: #fff}
 .topNavWarp{padding-left: $leftWidth;padding-right: $leftWidth;
   height:$topH;line-height: $topH;position: fixed; top:0;font-size:1.2em;
   left:0;z-index: 2;width: 100%; background-color:$topColor;color:$color;}
+.topNavWarp a:hover{background: $midColor2;color:$topColor}
 .title{padding:0 10px;left:0;color:$midColor2;position: absolute; display: block;font-size:1.2em;}
 .topNav{padding-left: 20px}
 .topNav a{color:$midColor2; display: block;float: left; margin:0 10px;padding: 0 20px}

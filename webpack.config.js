@@ -117,7 +117,7 @@ module.exports = {
   ],
   plugins: plugins,
   devServer: {
-    contentBase: path.join(__dirname, ''),
+    contentBase: path.join(__dirname, conf.webpack.indexDir),
     hot: true
   }
 };

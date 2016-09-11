@@ -3,9 +3,9 @@ var base = require('./base');
 
 const conf = {
   baseUrl: '/clear',
-  staticPath : '',
+  staticPath : '/dist',
   webpack: {
-    indexDir: './docs'
+    indexDir: './'
   }
 };
 

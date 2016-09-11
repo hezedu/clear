@@ -11,9 +11,9 @@ var bundleName = '[name]_bundle.js';
 var chunkName = '[name]_chunk.js';
 var baseStatic = conf.baseUrl + conf.staticPath;
 
-var distFileName = 'dev_dist';
+var distFileName = 'dev';
 if (isPro) {
-  distFileName = 'dist';
+  distFileName = 'pro';
 }
 var outputPath = path.join(__dirname, conf.webpack.indexDir + conf.staticPath + '/' + distFileName);
 var publicPath = baseStatic + '/' + distFileName;

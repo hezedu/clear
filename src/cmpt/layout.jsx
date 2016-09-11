@@ -116,12 +116,15 @@ export class Left extends Component {
 }
 
 //======================主展示区======================
-const hljs = require('highlight.js');
 
+// const hljs = {
+//   initHighlighting: function(){}
+// };
+const hljs = require('highlight.js/lib/highlight');
 require('github-markdown-css');
 require('highlight.js/styles/github.css');
-require('highlight.js/lib/languages/javascript');
-require('highlight.js/lib/languages/css');
+hljs.registerLanguage('js', require('highlight.js/lib/languages/javascript'));
+hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
 export class Main extends Component {
   loadHtml(){
     const path = this.props.filePath || this.props.route.link;

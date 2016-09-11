@@ -27,7 +27,6 @@
         "prefer-const": 0,
         "space-infix-ops": "error",
         "camelcase": "error",
-        "no-confusing-arrow": "error",
         "no-console": 0,
         "linebreak-style": 0,
         "quotes": 0,

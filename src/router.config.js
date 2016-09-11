@@ -1,27 +1,32 @@
 //import clear from 'clear';
 import * as layout from './cmpt/layout.jsx';
 import {LoginBox} from './cmpt/login.jsx';
-import { About } from './cmpt/about.jsx';
 import * as test from './cmpt/main/test/index.jsx';
+import Pit from './cmpt/pit.jsx';
 
 export const navRoutes = [
   {path: 'doc', component: layout.Left, title: '文档', firstChildIndex: true,
     childRoutes:[
       {path: 'start', component: layout.Main, title: '开始',
         childRoutes:[
-          {path: 'about2', component: About, title: 'test'}
         ]},
-      {path: 'css', component: About, title: 'css'},
-      {path: 'standard', component: About, title: '规范'}
+      {path: 'introduce',  title: '项目介绍', firstChildIndex: true,
+      childRoutes:[
+        {path: 'env', component: layout.Main, title: '环境'},
+        {path: 'list', component: layout.Main, title: '目录'},
+        {path: 'build', component: layout.Main, title: '构建命令'},
+      ]}
     ]},
   {path: 'test', component: layout.Left, title: 'test', firstChildIndex: true,
     childRoutes:[
+      {path: 'props_state', component:test.PropsAndState, title: 'props和state'},
       {path: 'hotload', component:test.HotLoad, title: 'hot-load'},
       {path: 'async', component:test.Async, title: '异步加载',
         childRoutes:[
         //  {path: 'dynamic_routing', getComponents, title: '动态路由'},
         ]},
-    ]}
+    ]},
+    {path: 'pit', component: Pit, title: '坑' }
 ];
 
 export default {

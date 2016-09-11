@@ -26,9 +26,15 @@ const tree = (arr, rpath) => {
     if (v.childRoutes) {
       childRoutes = <ul>{tree(v.childRoutes, v.link)}</ul>;
     }
+    let LinkOrNode;
+    if(v.component){
+      LinkOrNode = <Link to={v.link} activeClassName={style.active} onlyActiveOnIndex={true}>{v.title}</Link>;
+    }else{
+      LinkOrNode = <div className="clear-tree-node">{v.title}</div>;
+    }
     arr2[i] = (
       <li key={v.path}>
-        <Link to={v.link} activeClassName={style.active} onlyActiveOnIndex={true}>{v.title}</Link>
+        {LinkOrNode}
         {childRoutes}
       </li>);
   });

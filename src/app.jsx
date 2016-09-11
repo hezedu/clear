@@ -8,7 +8,7 @@ clear.BASE_URL = mount.getAttribute('base-url') || '';
 clear.BASE_STATIC = mount.getAttribute('base-static') || '';//静态文件path.
 
 const history = useRouterHistory(createHashHistory)({queryKey: false});
-import AppRoutes from './router.conf';
+import AppRoutes from './router.config';
 
 ReactDOM.render(
   <Router history={history} routes={AppRoutes} baseUrl={clear.BASE_URL} />,

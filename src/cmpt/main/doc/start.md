@@ -1,64 +1,36 @@
-### 安装
+# 环境
 
-#### nodejs
+### nodejs
 
 必须 [下载地址](https://nodejs.org/en/)
 
-#### cnpm
+
+### cnpm
 
 国内用户建议安装
+```
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+```
+然后用`cnpm`用来替换下面的`npm`
+### webpack
 
-    npm install -g cnpm --registry=https://registry.npm.taobao.org
-
-用法: 跟npm一样。只是把
-
-    npm
-
-命令换成了
-
-    cnpm
-
-#### 编辑器支持
-
-需要支持jsx语法高亮, eslint语法检查。\
- 比如:[Atom](https://atom.io/) \
- linter、linter-eslint、language-javascript-jsx
-
-[下载项目](https://github.com/hezedu/clear/archive/master.zip)
-
-#### webpack
-
-安装webpack
+安装全局webpack
 
     npm install webpack -g
 
-**然后跳转到项目目录下** \
+### 编辑器
 
-    npm install
+需要支持 **jsx** 语法高亮,  **eslint** 语法检查。<br>
+比如: **Atom** 编缉器: 在设置 -> install里搜：`linter`、`linter-eslint`、`language-javascript-jsx` 就可以了。<br>
+ [Atom下载](https://atom.io/)
 
-或
-
-    cnpm install
-
+# 安装
+[下载项目](https://github.com/hezedu/clear/archive/master.zip)
+### 然后跳转到项目目录下
+```
+npm install
+```
 ### 启动
-
-    npm start
-
-\
-
-国内用户如果没有 cnpm 可先安装**cnpm**
-
-    npm install -g cnpm --registry=https://registry.npm.taobao.org
-
-### css
-
-首先使用了**sass**,主要是为了变量功能.
-[文档](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#css_extensions)
-\
- 然后又使用了rucksack-css(一种**posscss**实现),主要是为了自动转换功能.
-[文档](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#css_extensions)
-
-* * * * *
-
-\
-
+```
+npm start
+```

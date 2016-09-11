@@ -54,11 +54,11 @@ if (isPro) { //正式环境下压缩
 };
 
 // ***************************** conf *****************************
-
+const moduleCss = 'css?modules&importLoaders=1&localIdentName=[local]_[hash:base64:5]';
 module.exports = {
   context: path.join(__dirname, './src'),
   entry: {
-    app: "./index.jsx",
+    app: "./app.jsx",
     vendor: [
       'react',
       'react-dom',

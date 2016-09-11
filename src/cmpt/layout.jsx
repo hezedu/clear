@@ -1,5 +1,4 @@
 import { Component, PropTypes} from 'react';
-import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import style from '../css/style.scss';
 import userStore from '../store/user';
@@ -7,7 +6,7 @@ import {LoginBar} from './login.jsx';
 import {Provider} from 'react-redux';
 import NavTree from './tree.jsx';
 import clear from 'clear';
-import {navRoutes} from '../router.conf';
+import {navRoutes} from '../router.config';
 import find from 'lodash/find';
 
 //======================router======================
@@ -65,7 +64,9 @@ export class Top extends Component {
           </a>
           </div>
         </div>
+        <div className={style.bottomWarp}>
           {this.props.children}
+        </div>
       </div>
     );
   }
@@ -101,7 +102,7 @@ export class Left extends Component {
   }
   render() {
     return (
-      <div className={style.bottomWarp}>
+      <div>
         <ul className={style.leftNav}>
           {this.mountNav()}
         </ul>
@@ -120,6 +121,8 @@ const hljs = require('highlight.js');
 
 require('github-markdown-css');
 require('highlight.js/styles/github.css');
+require('highlight.js/lib/languages/javascript');
+require('highlight.js/lib/languages/css');
 export class Main extends Component {
   loadHtml(){
     const path = this.props.filePath || this.props.route.link;
@@ -128,7 +131,11 @@ export class Main extends Component {
   }
   //state = { html:'' }
   componentDidMount(){
-    console.log(ReactDOM.findDOMNode(this));
+    hljs.initHighlighting.called = false;
+    hljs.initHighlighting();
+  }
+  componentDidUpdate(){
+    hljs.initHighlighting.called = false;
     hljs.initHighlighting();
   }
   render() {

@@ -54,7 +54,7 @@ class Index extends Component {
       <Provider store={countStore}>
         <CountTitle msg={this.state.msg} />
       </Provider>
-      <button onClick={::this.changeMsg}>改变props</button>
+      <button onClick={::this.changeMsg} style={{margin:'5px'}}>改变props</button>
       <Provider store={countStore}>
       <CountH1 msg={this.state.msg} />
       </Provider>

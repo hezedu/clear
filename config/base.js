@@ -1,7 +1,7 @@
 module.exports = {
   baseUrl: '',
-  staticPath : '',
+  staticPath : '/dist',
   webpack: {
-    indexDir: './dist'
+    indexDir: './'
   }
 };

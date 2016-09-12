@@ -6,29 +6,18 @@ $midColor2:#ccc;
 $topH : 50px;
 $leftWidth:200px;
 $leftAHeight:35px;
-.foo {
-  transition: all;
-}
 *{margin: 0; padding: 0;box-sizing: border-box;}
 :global {
   html , body, .height100{height: 100%;}
   body{font-family: "Microsoft YaHei", "Hiragino Sans GB";line-height: 1.5; font-size: 16px}
-  // pre{font-size:16px; background: #eee;font-family: "Courier new";
-  //   display: inline-block;margin: 0 5px;padding:0 5px;margin:5px 0;}
-  //   h1{font-size: 100px;text-align: center;line-height: 200px;color: $topColor;}
-  //   h2{font-size: 50px;text-align: center;color: #0050B2}
-  //   h3{font-size: 30px;padding: 10px 0;}
-  //   h4{padding:5px 0;font-size: 1.2em}
-  //   b{padding:0 2px;font-size: 1.2em}
-  //   .clear{clear:both;}
-  //   p{line-height: 1.5;margin-bottom: 16px;}
-    .note{color:$leftColor}
-    .clear-tree-node{padding-left:10px;color:$midColor2;height: 35px;line-height: 35px}
+  ul, ol { list-style: none; display: block}
+  a { text-decoration: none;cursor:pointer;}
+  input{padding-left:.5em}
+  hr{border-color: #fff}
+  .note{color:$leftColor}
+  .clear-tree-node{padding-left:10px;color:$midColor2;height: 35px;line-height: 35px}
 }
-ul, ol { list-style: none; display: block}
-a { text-decoration: none;cursor:pointer;}
-input{padding-left:.5em}
-hr{border-color: #fff}
+
 .btn{padding:5px 10px;cursor: pointer}
 .loginBox{width: 400px; height: 200px;margin:auto; position: absolute;
   left:0; right:0; background: #eee;top:0; bottom:0;padding:10px;}

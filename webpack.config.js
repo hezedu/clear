@@ -2,9 +2,9 @@ var path = require('path');
 var rucksack = require('rucksack-css');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+var virgin = require('virgin');
 
-var conf = require('./config/' + (process.env.NODE_ENV || 'base'));
+var conf = require('./config/' + (virgin.confName || 'base'));
 var isPro = process.env.NODE_ENV === 'production';
 
 var bundleName = '[name]_bundle.js';
@@ -107,7 +107,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
-      'clear': 'virgin'
+      //'clear': 'virgin'
     }
   },
   postcss: [

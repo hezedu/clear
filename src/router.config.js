@@ -1,4 +1,3 @@
-//import clear from 'clear';
 import * as layout from './cmpt/layout.jsx';
 import {LoginBox} from './cmpt/login.jsx';
 import * as test from './cmpt/test/index.jsx';
@@ -33,7 +32,7 @@ export default {
   path: '/', component: layout.Root,
   childRoutes: [
     { path: 'login', component: LoginBox },
-    { component: layout.Top, //onEnter:clear.isLogin,
+    { component: layout.Top,
       indexRoute: {component: layout.Home },
     childRoutes:navRoutes},
     { path: '*', component: layout.Error}

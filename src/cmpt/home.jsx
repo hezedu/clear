@@ -1,8 +1,35 @@
-import { Component } from 'react';
+import { Component , PropTypes} from 'react';
 import style from '../css/style.scss';
+import countStore from '../store/count';
+import {connect, Provider} from 'react-redux';
+
+class Title extends Component {
+  static PropTypes = {
+    msg: PropTypes.string
+  };
+  state = {msg: 'world'}
+  handleClick(){
+    this.props.dispatch({type:'INCREMENT'})
+  }
+  render() {
+    return (<div>
+      <h1 className={style.title} onClick={::this.handleClick}>{this.props.msg} {this.state.msg} ! </h1>
+      <p>{this.props.count}</p>
+      </div>);
+  }
+}
+
+const mapStateToProps = (state) => { return {count:state}; };
+const CountTitle = connect(mapStateToProps)(Title);
 
 export default class extends Component {
   render() {
-    return (<h1 className={style.title}> hello world! </h1>);
+    return (
+      <div>
+      <Provider store={countStore}>
+        <CountTitle msg="hello" />
+      </Provider>
+      </div>
+    );
   }
 }

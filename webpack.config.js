@@ -2,21 +2,16 @@ var path = require('path');
 var rucksack = require('rucksack-css');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var virgin = require('virgin');
-
-var conf = require('./config/' + (virgin.confName || 'base'));
+var confName = process.env.NODE_BUILD_CONF_NAME || 'dev';
+var conf = require('./config/' + confName);
+var SERVER_CONF = conf.server;
 var isPro = process.env.NODE_ENV === 'production';
-
 var bundleName = '[name]_bundle.js';
 var chunkName = '[name]_chunk.js';
-var baseStatic = conf.baseUrl + conf.staticPath;
+var baseStatic = SERVER_CONF.baseUrl + conf.staticPath;
 
-var distFileName = 'dev';
-if (isPro) {
-  distFileName = 'pro';
-}
-var outputPath = path.join(__dirname, conf.webpack.indexDir + conf.staticPath + '/' + distFileName);
-var publicPath = baseStatic + '/' + distFileName;
+var outputPath = path.join(__dirname, conf.indexDir + conf.staticPath + '/' + confName);
+var publicPath = baseStatic + '/' + confName;
 
 // ***************************** plugins *****************************
 var plugins = [
@@ -32,11 +27,10 @@ var plugins = [
   }),
   // create index.html
   new HtmlWebpackPlugin({
-    filename: path.join(__dirname, conf.webpack.indexDir + '/index.html'),
+    filename: path.join(__dirname, conf.indexDir + '/index.html'),
     template: path.join(__dirname, '/src/index.ejs'),
     //tpl option
-    baseUrl:conf.baseUrl,
-    baseStatic
+    SERVER_CONF
   })
 ]
 
@@ -117,7 +111,7 @@ module.exports = {
   ],
   plugins: plugins,
   devServer: {
-    contentBase: path.join(__dirname, conf.webpack.indexDir),
+    contentBase: path.join(__dirname, conf.indexDir),
     hot: true
   }
 };

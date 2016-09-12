@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
+<% var data = htmlWebpackPlugin.options %>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <link rel="shortcut icon" href="<%=htmlWebpackPlugin.options.baseStatic %>/static/favicon.png">
+    <link rel="shortcut icon" href="<%=data.SERVER_CONF.baseStatic %>/static/favicon.png">
     <title>clear前端架构</title>
   </head>
   <body>
-  <div id="app" class="height100"
-    base-url="<%=htmlWebpackPlugin.options.baseUrl %>"
-    base-static="<%=htmlWebpackPlugin.options.baseStatic %>">
-  </div>
+  <div id="app"></div>
+  <script>
+  var SERVER_CONF = <%=JSON.stringify(data.SERVER_CONF)%>
+  </script>
 </body>
 </html>

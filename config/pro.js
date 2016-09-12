@@ -1,12 +1,13 @@
 var _ = require('lodash');
-var base = require('./base');
+var base = require('./dev');
 
 const conf = {
-  baseUrl: '',
+  indexDir: './dist',
   staticPath : '',
-  webpack: {
-    indexDir: './dist'
+  server: {
+    baseUrl: ''
   }
 };
 
+conf.server.baseStatic = conf.server.baseUrl + conf.staticPath;
 module.exports =  _.merge(base, conf);

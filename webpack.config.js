@@ -2,9 +2,9 @@ var path = require('path');
 var rucksack = require('rucksack-css');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+var virgin = require('virgin');
 
-var conf = require('./config/' + (process.env.NODE_ENV || 'base'));
+var conf = require('./config/' + (virgin.confName || 'base'));
 var isPro = process.env.NODE_ENV === 'production';
 
 var bundleName = '[name]_bundle.js';
@@ -54,7 +54,7 @@ if (isPro) { //正式环境下压缩
 };
 
 // ***************************** conf *****************************
-const moduleCss = 'css?modules&importLoaders=1&localIdentName=[local]_[hash:base64:5]';
+
 module.exports = {
   context: path.join(__dirname, './src'),
   entry: {
@@ -107,7 +107,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
-      'clear': 'virgin'
+      //'clear': 'virgin'
     }
   },
   postcss: [
@@ -117,7 +117,7 @@ module.exports = {
   ],
   plugins: plugins,
   devServer: {
-    contentBase: path.join(__dirname, ''),
+    contentBase: path.join(__dirname, conf.webpack.indexDir),
     hot: true
   }
 };

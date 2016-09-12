@@ -1,4 +1,3 @@
-//import clear from 'clear';
 import * as layout from './cmpt/layout.jsx';
 import {LoginBox} from './cmpt/login.jsx';
 import * as test from './cmpt/test/index.jsx';
@@ -13,8 +12,8 @@ export const navRoutes = [
       {path: 'introduce',  title: '项目介绍', firstChildIndex: true,
       childRoutes:[
         {path: 'env', component: layout.Main, title: '环境'},
-        {path: 'list', component: layout.Main, title: '目录'},
         {path: 'build', component: layout.Main, title: '构建命令'},
+        {path: 'list', component: layout.Main, title: '目录'},
       ]}
     ]},
   {path: 'test', component: layout.Left, title: 'test', firstChildIndex: true,
@@ -26,14 +25,14 @@ export const navRoutes = [
         //  {path: 'dynamic_routing', getComponents, title: '动态路由'},
         ]},
     ]},
-    {path: 'pit', component: Pit, title: '坑' }
+    {path: 'pit', component: Pit, title: '注意事项' }
 ];
 
 export default {
   path: '/', component: layout.Root,
   childRoutes: [
     { path: 'login', component: LoginBox },
-    { component: layout.Top, //onEnter:clear.isLogin,
+    { component: layout.Top,
       indexRoute: {component: layout.Home },
     childRoutes:navRoutes},
     { path: '*', component: layout.Error}

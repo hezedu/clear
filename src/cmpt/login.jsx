@@ -1,25 +1,27 @@
-import { Component} from 'react';
+import { Component, PropTypes} from 'react';
 import { Link } from 'react-router';
 import userStore from '../store/user';
 import style from '../css/style.scss';
 import {connect} from 'react-redux';
-import clear from 'clear';
 const testData = {
   id:1,
   name: 'dw'
 };
 
-clear.isLogin = (nextState, replace) => {
+export const isLogin = (nextState, replace) => {
   if(!userStore.getState()){
     replace('/login');
   }
 };
 
 export class LoginBox extends Component {
+  static contextTypes = {
+    router: PropTypes.object.isRequired,
+  };
   state = testData;
   submit(){
     userStore.dispatch({type: 'login', data: this.state});
-    clear.router.push('/');
+    this.context.router.push('/');
   }
   setName(event){
     this.setState({name: event.target.value});
@@ -39,9 +41,12 @@ export class LoginBox extends Component {
 }
 
 class Bar extends Component {
+  static contextTypes = {
+    router: PropTypes.object.isRequired,
+  };
   logout(){
     this.props.dispatch({type: 'logout'});
-    clear.router.push('/');
+    this.context.router.push('/');
   }
   render() {
     if(!this.props.user){

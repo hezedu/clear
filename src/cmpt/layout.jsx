@@ -5,7 +5,7 @@ import userStore from '../store/user';
 import {LoginBar} from './login.jsx';
 import {Provider} from 'react-redux';
 import NavTree from './tree.jsx';
-import clear from 'clear';
+import virgin from 'virgin';
 import {navRoutes} from '../router.config';
 import find from 'lodash/find';
 
@@ -16,8 +16,8 @@ export class Root extends Component {
     location: PropTypes.object.isRequired
   };
   componentWillMount(){
-    clear.router = this.context.router;
-    clear.location = this.props.location;
+    virgin.router = this.context.router;
+    virgin.location = this.props.location;
   }
   render() {
     return this.props.children;
@@ -59,7 +59,7 @@ export class Top extends Component {
             <LoginBar />
           </Provider>
           <a href='https://github.com/hezedu/clear' target="_blank" className={style.githubIcon}>
-          <img src={clear.BASE_STATIC + '/static/pinned-octocat.svg'} />
+          <img src={virgin.BASE_STATIC + '/static/pinned-octocat.svg'} />
           </a>
           </div>
         </div>

@@ -1,5 +1,9 @@
 process.env.NODE_ENV = 'production';
+
 var child_process = require('child_process');
+var path = require('path');
+var virgin = require('virgin');
+virgin.confName = 'pro';
 
 var build_sh = 'webpack --colors';
 console.log('开始build...');

@@ -13,7 +13,9 @@ class Title extends Component {
   }
   render() {
     return (<div>
-      <h1 className={style.title} onClick={::this.handleClick}>{this.props.msg} {this.state.msg} ! </h1>
+      <h1 className={style.title} >
+        <span onClick={::this.handleClick}>{this.props.msg} {this.state.msg} ! </span>
+      </h1>
       <p>{this.props.count}</p>
       </div>);
   }

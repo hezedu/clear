@@ -4,15 +4,18 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var confName = process.env.NODE_BUILD_CONF_NAME || 'dev';
 var conf = require('./config/' + confName);
-var SERVER_CONF = conf.server;
+var indexData = conf.indexData = {};
 var isPro = process.env.NODE_ENV === 'production';
 var bundleName = '[name]_bundle.js';
 var chunkName = '[name]_chunk.js';
-var baseStatic = SERVER_CONF.baseStatic || SERVER_CONF.baseUrl + conf.staticPath;
+
+var baseStatic  = conf.baseUrl + conf.staticPath;
 
 var outputPath = path.join(__dirname, conf.indexDir + conf.staticPath + '/' + confName);
 var publicPath = baseStatic + '/' + confName;
 
+indexData.BASE_URL = conf.baseUrl;
+indexData.BASE_STATIC = baseStatic;
 // ***************************** plugins *****************************
 var plugins = [
   new webpack.optimize.DedupePlugin(),
@@ -30,7 +33,7 @@ var plugins = [
     filename: path.join(__dirname, conf.indexDir + '/index.html'),
     template: path.join(__dirname, '/src/index.ejs'),
     //tpl option
-    SERVER_CONF
+    indexData
   })
 ]
 

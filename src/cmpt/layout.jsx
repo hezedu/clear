@@ -5,7 +5,10 @@ export class Top extends Component {
   render() {
     return (
       <div>
-        <div className="top"><Link to='/' onlyActiveOnIndex={true} activeClassName='active'>home</Link></div>
+        <div className="top">
+        <Link to='/' onlyActiveOnIndex={true} activeClassName='active'>home</Link>
+        <Link to='/demo' onlyActiveOnIndex={true} activeClassName='active'>demo</Link>
+        </div>
         <div className="bottom">{this.props.children}</div>
       </div>
     );

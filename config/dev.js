@@ -1,11 +1,10 @@
 var  conf = {
   indexDir: './',
   staticPath : '/dist',
-  server: { //这里是index.html 里的SERVER_CONF
-    baseUrl: ''
+  baseUrl: '',
+  indexData: { //这里数据将会传给index.ejs。
+    //build时传自动添加：BASE_URL,BASE_STATIC两个属性。
   }
 };
-
-conf.server.baseStatic = conf.server.baseUrl + conf.staticPath;
 
 module.exports = conf;

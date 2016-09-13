@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
-<% var data = htmlWebpackPlugin.options %>
+<% var data = htmlWebpackPlugin.options.indexData %>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <link rel="shortcut icon" href="<%=data.SERVER_CONF.baseStatic %>/static/favicon.png">
+    <link rel="shortcut icon" href="<%=data.BASE_STATIC %>/static/favicon.png">
     <title>clear前端架构</title>
   </head>
   <body>
   <div id="app"></div>
   <script>
-  var SERVER_CONF = <%=JSON.stringify(data.SERVER_CONF)%>
+  var SERVER_CONFIG = <%=JSON.stringify(data)%>
   </script>
 </body>
 </html>

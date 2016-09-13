@@ -1,9 +1,6 @@
 import { Component, PropTypes} from 'react';
 import { Link } from 'react-router';
 import style from '../css/style.scss';
-import userStore from '../store/user';
-import {LoginBar} from './login.jsx';
-import {Provider} from 'react-redux';
 import NavTree from './tree.jsx';
 import {navRoutes} from '../router.config';
 import find from 'lodash/find';
@@ -54,9 +51,6 @@ export class Top extends Component {
             {this.NavList()}
           </div>
           <div className={style.topRightBar}>
-          <Provider store={userStore}>
-            <LoginBar />
-          </Provider>
           <a href='https://github.com/hezedu/clear' target="_blank" className={style.githubIcon}>
           <img src={window.SERVER_CONFIG.BASE_STATIC + '/static/pinned-octocat.svg'} />
           </a>
@@ -105,9 +99,7 @@ export class Left extends Component {
           {this.mountNav()}
         </ul>
         <div className={style.mainWarp}>
-          <div className={style.main}>
             {this.props.children}
-          </div>
         </div>
       </div>
     );
@@ -126,7 +118,7 @@ hljs.registerLanguage('js', require('highlight.js/lib/languages/javascript'));
 hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
 export class Main extends Component {
   loadHtml(){
-    const path = this.props.filePath || this.props.route.link;
+    const path = this.props.filePath || this.props.route.link || this.props.route.path;
     const html = require(`../md${path}.md`);
     return html;
   }

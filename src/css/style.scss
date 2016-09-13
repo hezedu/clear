@@ -39,15 +39,16 @@ $leftAHeight:35px;
 .topNav{padding-left: 20px}
 .topNav a{color:$midColor2; display: block;float: left; margin:0 10px;padding: 0 20px}
 .topNav a.active, .topNav a:hover{background: $midColor; color:$color}
-.topRightBar {right:0px;font-size: 16px;position: absolute;color:$midColor2;padding-right:40px;}
+.topRightBar {right:0px;font-size: 16px;position: absolute;color:$midColor2;padding-right:40px;height: 100%;}
 .topRightBar a.githubIcon{float: right;position: absolute;right: 0;top:0;height: 100%;padding:0 5px}
 .topRightBar .githubIcon img{width:30px;height: 30px;vertical-align: middle}
 .loginBar a{color: $midColor2; padding:5px 10px;margin-right:10px;}
 
 .bottomWarp{padding-top:$topH;height: 100%;position: relative;}
+.bottomWarp>:global(.markdown-body){width: 980px;padding:45px;margin: 0 auto;}
 
 .mainWarp{padding-left:$leftWidth; width:100%; position: relative; height: 100%;}
-.main{width: 100%;padding:10px 40px 50px;}
+.mainWarp>:global(.markdown-body){padding:10px 40px 80px;}
 .main hr{margin: 10px 0;}
 .leftNav{width: $leftWidth;height: 100%;position: fixed;top:$topH;left:0;z-index: 2;padding-top: 10px;
 background-color: $midColor}

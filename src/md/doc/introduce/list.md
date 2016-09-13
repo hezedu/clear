@@ -3,11 +3,13 @@
   - **/src** - 源文件夹
       - **/cmpt** - React component库
       - **/css** - 样式文件夹
+      - **/store** - redux的store
       - route.config.js -路由配置
-      - <span style="color:#888">index.ejs - 首页ejs模版</span>
+      - index.ejs - 首页模版
       - <span style="color:#888">app.jsx - 入口文件</span>
   - <span style="color:#888">**/config** - build的一些配置</span>
   - <span style="color:#888">**/dist** - build分发文件夹</span>
+      - **/static** - 默认静态文件夹
   - <span style="color:#888">**/script** - build的一些脚本</span>
   - <span style="color:#888">webpack.config.js - webpack配置</span>
   - <span style="color:#888">package.json - npm包管理文件,包含一些build命令</span>

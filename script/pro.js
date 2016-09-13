@@ -1,15 +1,26 @@
 process.env.NODE_ENV = 'production';
 process.env.NODE_BUILD_CONF_NAME = 'pro';
 var child_process = require('child_process');
+var path = require('path');
+var del = require('fuckwinfsdel');
+var conf = require('../config/pro');
+var clearDir = path.join(__dirname,'../', conf.indexDir, 'pro');
 
 var build_sh = 'webpack --colors';
-console.log('开始build...');
-child_process.exec(build_sh, function(err, result){
+console.log('开始清空:',clearDir, '...');
+del(clearDir, function(err){
   if(err){
-    return console.log('build 失败', err);
+    console.error(err);
   }
-  console.log(result);
-});
+  console.log('开始build...');
+  child_process.exec(build_sh, function(err, result){
+    if(err){
+      return console.log('build 失败', err);
+    }
+    console.log(result);
+  });
+})
+
 
 //var path = require('path');
 // function(env){

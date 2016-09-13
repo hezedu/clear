@@ -5,10 +5,9 @@ import userStore from '../store/user';
 import {LoginBar} from './login.jsx';
 import {Provider} from 'react-redux';
 import NavTree from './tree.jsx';
-import virgin from 'virgin';
 import {navRoutes} from '../router.config';
 import find from 'lodash/find';
-
+import virgin from 'virgin';
 //======================router======================
 export class Root extends Component {
   static contextTypes = {
@@ -59,7 +58,7 @@ export class Top extends Component {
             <LoginBar />
           </Provider>
           <a href='https://github.com/hezedu/clear' target="_blank" className={style.githubIcon}>
-          <img src={virgin.BASE_STATIC + '/static/pinned-octocat.svg'} />
+          <img src={window.SERVER_CONFIG.BASE_STATIC + '/static/pinned-octocat.svg'} />
           </a>
           </div>
         </div>

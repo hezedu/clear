@@ -1,35 +1,8 @@
-import Home from './cmpt/home.jsx';
-import List from './cmpt/list.jsx';
-import Detail from './cmpt/detail.jsx';
-
-const dynamicRouting = {
-  path: 'dynamic_routing',
-  title: '动态路由',
-  getComponents: function(nextState, callback) {
-    require(['./cmpt/dynamic_routing.jsx'], function (cmpt) {
-      callback(null, cmpt.default);
-    });
-  }
-};
-
-const mUidynamicRouting = {
-  path: 'material_ui',
-  title: 'material-ui',
-  getComponents: function(nextState, callback) {
-    require(['./cmpt/material_ui'], function (cmpt) {
-      callback(null, cmpt.default);
-    });
-  }
-};
-
+import Home from './cmpt/home';
+import layout from './cmpt/layout';
 
 export default {
   path: '/',
-  indexRoute: { component: Home },
-  childRoutes:[
-    {path: 'list', component: List, title: '列表'},
-    {path: 'detail/:id', component: Detail, title: '详情'},
-    dynamicRouting ,
-    mUidynamicRouting,
-  ]
+  component: layout.Top,
+  indexRoute: { component: Home }
 };

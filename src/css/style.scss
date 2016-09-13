@@ -1,12 +1,16 @@
+$navheight: 50px;
 * {
   box-sizing: border-box;
 }
 body{
-  margin:0;
+  margin:50px;
   font-family : "Microsoft YaHei", "Hiragino Sans GB", "Courier new";
 }
-
-.local{border-bottom: 1px solid #888;  padding: 50px;}
-.local b{font-size: 2em}
-.local button{margin:5px}
-.local span{font-size: 14px; color:#666}
+:global{
+  html, body, .root{height:100%}
+  .top{height:$navheight;position: fixed;width:100%;}
+  .bottom{height:100%;padding-top:$navheight; position: relative}
+}
+.test b{font-size: 2em}
+.test button{margin:5px}
+.test span{font-size: 14px; color:#666}

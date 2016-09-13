@@ -16,16 +16,17 @@ class Title extends Component {
     this.props.dispatch({type:'DECREMENT'})
   }
   render() {
-    return (<div className={style.local}>
+    return (<div>
+      <hr/>
         <span>props.msg = </span><b>{this.props.msg}</b>
-        <br/>
         <span>state.msg = </span><b>{this.state.msg}</b>
         <button onClick={::this.changeMsg}>改变state</button>
-        <br/>
+          <br/>
         <span>store count = </span><b>{this.props.count}</b>
         <button onClick={::this.addCount}>增加count</button>
         <button onClick={::this.reduceCount}>减少count</button>
         <p/>
+        <hr/>
       </div>);
   }
 }
@@ -37,6 +38,7 @@ function changeMsg() {
   msg = msg.split('').reverse().join('');
   this.setState({msg});
 }
+
 class H1 extends Component {
   render() {
     return (
@@ -50,11 +52,12 @@ class Index extends Component {
   changeMsg = changeMsg;
   render() {
     return (
-      <div>
+      <div  className={style.test}>
+      <span>state.msg = </span><b>{this.state.msg}</b>
+      <button onClick={::this.changeMsg} style={{margin:'5px'}}>改变state</button>
       <Provider store={countStore}>
         <CountTitle msg={this.state.msg} />
       </Provider>
-      <button onClick={::this.changeMsg} style={{margin:'5px'}}>改变props</button>
       <Provider store={countStore}>
       <CountH1 msg={this.state.msg} />
       </Provider>

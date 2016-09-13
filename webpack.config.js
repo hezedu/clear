@@ -8,7 +8,7 @@ var SERVER_CONF = conf.server;
 var isPro = process.env.NODE_ENV === 'production';
 var bundleName = '[name]_bundle.js';
 var chunkName = '[name]_chunk.js';
-var baseStatic = SERVER_CONF.baseUrl + conf.staticPath;
+var baseStatic = SERVER_CONF.baseStatic || SERVER_CONF.baseUrl + conf.staticPath;
 
 var outputPath = path.join(__dirname, conf.indexDir + conf.staticPath + '/' + confName);
 var publicPath = baseStatic + '/' + confName;

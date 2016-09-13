@@ -7,7 +7,7 @@ body{
   font-family : "Microsoft YaHei", "Hiragino Sans GB", "Courier new";
 }
 :global{
-  html, body, .root{height:100%}
+  html, body, .clear_app{height:100%}
   .top{height:$navheight;position: fixed;width:100%;z-index: 2;}
   .bottom{height:100%;padding-top:$navheight; position: relative}
 }

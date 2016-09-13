@@ -4,7 +4,7 @@ var child_process = require('child_process');
 var path = require('path');
 var del = require('fuckwinfsdel');
 var conf = require('../config/pro');
-var clearDir = path.join(__dirname,'../', conf.indexDir, 'pro');
+var clearDir = path.join(__dirname,'../', conf.indexDir, conf.staticPath , 'pro');
 
 var build_sh = 'webpack --colors';
 console.log('开始清空:',clearDir, '...');

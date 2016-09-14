@@ -72,14 +72,14 @@ module.exports = {
     chunkFilename: chunkName
   },
   module: {
-    preLoaders: [
-        {
-          test: /\.(js|jsx)$/,
-          loader: 'eslint-loader',
-          include: [path.resolve(__dirname, "src")],
-          exclude: [/(node_modules|bower_components)/] // galaxy|checkin 历史代码
-        }
-    ],
+    // preLoaders: [
+    //     {
+    //       test: /\.(js|jsx)$/,
+    //       loader: 'eslint-loader',
+    //       include: [path.resolve(__dirname, "src")],
+    //       exclude: /node_modules/ // galaxy|checkin 历史代码
+    //     }
+    // ],
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,

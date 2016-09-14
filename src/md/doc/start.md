@@ -17,7 +17,7 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 安装全局webpack
 
     npm install webpack -g
-
+    npm install webpack-dev-server -g
 ### 编辑器
 
 需要支持 **jsx** 语法高亮,  **eslint** 语法检查。<br>

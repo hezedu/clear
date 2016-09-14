@@ -1,9 +1,7 @@
 
 import ReactDOM from 'react-dom';
 import {Router, useRouterHistory} from 'react-router';
-import createHashHistory from 'history/lib/createHashHistory';
-
-
+import createHashHistory from 'react-router/node_modules/history/lib/createHashHistory';
 const mount = document.getElementById('app');
 
 const history = useRouterHistory(createHashHistory)({queryKey: false});

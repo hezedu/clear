@@ -21,7 +21,7 @@ class Index extends Component {
         {JSON.stringify(_requireHaveModule)}
         <h2>加上module.exports后的import *</h2>
         {JSON.stringify(_importHaveModule)}
-        <h3>结论:module.exports = import *.default</h3>
+        <h3>结论:module.exports = export default</h3>
         <hr/>
         最终结论:
         <h1>require !== import * !== import default</h1>

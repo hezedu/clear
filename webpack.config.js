@@ -55,7 +55,6 @@ if (isPro) { //正式环境下压缩
 module.exports = {
   context: path.join(__dirname, './src'),
   entry: {
-    app: "./app.jsx",
     vendor: [
       'react',
       'react-dom',
@@ -63,7 +62,8 @@ module.exports = {
       'redux',
       'react-redux',
       //'react-router-redux',
-    ]
+    ],
+    app: "./app.jsx"
   },
   output: {
     path: outputPath,

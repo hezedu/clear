@@ -1,4 +1,5 @@
 /*.db
 /node_modules
 /dist/dev
-/dist/pro/!a_vendor_bundle.js
+/dist/pro
+!/dist/pro/a_vendor_bundle.js

@@ -12,6 +12,7 @@ export const navRoutes = [
         {path: 'env', component: layout.Main, title: '环境'},
         //{path: 'build', component: layout.Main, title: '构建命令'},
         {path: 'list', component: layout.Main, title: '目录'},
+        {path: 'pit', component: layout.Main,  title: '开发注意事项' }
       ]}
     ]},
   {path: 'build', component: layout.Main,  title: 'build' },
@@ -24,7 +25,7 @@ export const navRoutes = [
   //       //  {path: 'dynamic_routing', getComponents, title: '动态路由'},
   //       ]},
   //   ]},
-    {path: 'pit', component: layout.Main,  title: '注意事项' }
+
 ];
 
 export default {

@@ -1,15 +1,15 @@
 ## 灰色的文件是一般不会动的。
-- **clear/**
+- **./**
   - **/src** - 源文件夹
-      - **/cmpt** - React component库
-      - **/css** - 样式文件夹
-      - **/store** - redux的store
+      - **/cmpt** - 默认React component库,里面有些demo
+      - **/css** - 默认样式文件夹
+      - **/store** - 默认存redux的store
       - route.config.js -路由配置
       - index.ejs - 首页模版
       - <span style="color:#888">app.jsx - 入口文件</span>
   - <span style="color:#888">**/config** - build的一些配置</span>
   - <span style="color:#888">**/dist** - build分发文件夹</span>
-      - **/static** - 默认静态文件夹
+      - **/static** - 默认放静态文件的地方
   - <span style="color:#888">**/script** - build的一些脚本</span>
   - <span style="color:#888">webpack.config.js - webpack配置</span>
   - <span style="color:#888">package.json - npm包管理文件,包含一些build命令</span>

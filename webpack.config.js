@@ -4,25 +4,32 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var confName = process.env.NODE_BUILD_CONF_NAME || 'dev';
 var conf = require('./config/' + confName);
-var indexData = conf.indexData = {};
-var isPro = process.env.NODE_ENV === 'production';
-var bundleName = '[name]_bundle.js';
-var chunkName = '[name]_chunk.js';
 
-var baseStatic  = conf.baseUrl + conf.staticPath;
+var isPro = process.env.NODE_ENV === 'production';
+var bundleName = conf.bundleName;
+var chunkName = conf.chunkName;
+
+var baseStatic;
+if(/(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?/.test(conf.staticPath)) { //是否为URL.
+  baseStatic = conf.staticPath;
+}else{
+  baseStatic  = conf.baseUrl + conf.staticPath;
+}
 
 var outputPath = path.join(__dirname, conf.indexDir + conf.staticPath + '/' + confName);
 var publicPath = baseStatic + '/' + confName;
 
+var indexData = conf.indexData || {};
 indexData.BASE_URL = conf.baseUrl;
 indexData.BASE_STATIC = baseStatic;
+
 // ***************************** plugins *****************************
 var plugins = [
   new webpack.optimize.DedupePlugin(),
-  new webpack.ProvidePlugin({
+  new webpack.ProvidePlugin({//不用在每个文件里import React from 'react'了
     React : 'react'
   }),
-  new webpack.optimize.CommonsChunkPlugin("vendor", bundleName),//提取公共模块
+  new webpack.optimize.CommonsChunkPlugin("a_vendor", bundleName),//提取公共模块
   new webpack.DefinePlugin({
     'process.env': {//React 要用的变量。
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
@@ -36,9 +43,15 @@ var plugins = [
     indexData
   })
 ]
+// ***************************** 环境适配 *****************************
+var jsxLoader = [
+  'react-hot',
+  'babel-loader'
+];
+if (isPro) {
+  jsxLoader.shift(); //正式环境不加载 react-hot-loader, 可以节省文件大小。
 
-if (isPro) { //正式环境下压缩
-  plugins.push(
+  plugins.push(//正式环境下压缩
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -54,8 +67,8 @@ if (isPro) { //正式环境下压缩
 
 module.exports = {
   context: path.join(__dirname, './src'),
-  entry: {
-    vendor: [
+  entry: { //使用开头字母排序，防止vendor随着app代玛改变而改变。https://github.com/webpack/webpack/issues/1315#issuecomment-247269598
+    a_vendor: [
       'react',
       'react-dom',
       'react-router',
@@ -63,7 +76,7 @@ module.exports = {
       'react-redux',
       //'react-router-redux',
     ],
-    app: "./app.jsx"
+    z_app: "./app.jsx"
   },
   output: {
     path: outputPath,
@@ -72,26 +85,23 @@ module.exports = {
     chunkFilename: chunkName
   },
   module: {
-    preLoaders: [
+    preLoaders: [ //代码检查
         {
           test: /\.(js|jsx)$/,
           loader: 'eslint-loader',
           include: [path.resolve(__dirname, "src")],
-          exclude: [/(node_modules|bower_components)/] // galaxy|checkin 历史代码
+          exclude: [/(node_modules|bower_components)/]
         }
     ],
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loaders: [
-        'react-hot',
-        'babel-loader'
-      ]
+      loaders: jsxLoader
     },
     {test: /\.md$/, loaders: ['html', 'markdown']},
     {test: /\.css$/, loaders: ['style', 'css']},
     {test: /\.html$/,loaders: ['html']},
-     {
+    {
       test: /\.scss$/,
       loaders: [
         "style",
@@ -104,7 +114,6 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
-      //'clear': 'virgin'
     }
   },
   postcss: [

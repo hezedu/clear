@@ -1,16 +1,16 @@
-#webpack
-缓存
-id 为 array的index  会变
-name 为 object的key. 不会变
-hash 整个项目hash
-chunkhash 单个文件hash
+# webpack
+webpack 文件名：
+- [id] 为 array的index  会变
+- [name] 为 object的key. 不会变
+- [hash] 整个项目hash
+- [chunkhash] 单个文件hash
 
 
-缺陷：
+### 缺陷
 当import 位置变了，vendor也会变。
 webpack --optimize-occurence-order 没有chunk好使
 
-code-spliting
+### code-spliting
 chunk 没有 name
 引用多个chunk有相同文件时，会重复打包。
 比如：

@@ -16,6 +16,11 @@ export const navRoutes = [
       ]}
     ]},
   {path: 'build', component: layout.Main,  title: 'build' },
+  {path: 'features', component: layout.Main,  title: '特性' },
+  // {path: 'high_grade', component: layout.Left, title: '高级', firstChildIndex: true,
+  // childRoutes:[
+  //   {path: 'webpack', component: layout.Main, title: 'webpack'}
+  // ]},
   // {path: 'test', component: layout.Left, title: 'test', firstChildIndex: true,
   //   childRoutes:[
   //     {path: 'props_state', component:test.PropsAndState, title: 'props和state'},

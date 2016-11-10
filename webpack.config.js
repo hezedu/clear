@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var confName = process.env.NODE_BUILD_CONF_NAME || 'dev';
 var conf = require('./config/' + confName);
-
+var pageage = require('./package.json');
 var isPro = process.env.NODE_ENV === 'production';
 var bundleName = conf.bundleName;
 var chunkName = conf.chunkName;
@@ -17,11 +17,12 @@ if(/(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9
 }
 
 var outputPath = path.join(__dirname, conf.indexDir + conf.staticPath + '/' + confName);
-var publicPath = baseStatic + '/' + confName;
+var publicPath = baseStatic + '/' + confName + '/';
 
 var indexData = conf.indexData || {};
 indexData.BASE_URL = conf.baseUrl;
 indexData.BASE_STATIC = baseStatic;
+indexData.VERSION = pageage.version;
 
 // ***************************** plugins *****************************
 var plugins = [
@@ -29,7 +30,18 @@ var plugins = [
   new webpack.ProvidePlugin({//不用在每个文件里import React from 'react'了
     React : 'react'
   }),
-  new webpack.optimize.CommonsChunkPlugin("a_vendor", bundleName),//提取公共模块
+  //提取公共模块
+  new webpack.optimize.CommonsChunkPlugin({
+    names: [
+          //当前版本webpackBUG: 它会对Object key 排序。所以这里用字母排序fixed.
+          //顺序不要变，名字也不要变
+          'b_react_vendor',
+          'a_out_lib',
+          'a_1_mainifest' //a_1_mainifest 必须在最后面
+          ],
+    filename: bundleName}),
+
+
   new webpack.DefinePlugin({
     'process.env': {//React 要用的变量。
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
@@ -37,6 +49,7 @@ var plugins = [
   }),
   // create index.html
   new HtmlWebpackPlugin({
+    chunksSortMode: 'dependency',
     filename: path.join(__dirname, conf.indexDir + '/index.html'),
     template: path.join(__dirname, '/src/index.ejs'),
     //tpl option
@@ -64,17 +77,17 @@ if (isPro) {
 };
 
 // ***************************** conf *****************************
-
 module.exports = {
   context: path.join(__dirname, './src'),
-  entry: { //使用开头字母排序，防止vendor随着app代玛改变而改变。https://github.com/webpack/webpack/issues/1315#issuecomment-247269598
-    a_vendor: [
+  entry: { //使用开头字母排序，防止vendor随着app代玛改变而改变。hack this bug https://github.com/webpack/webpack/pull/2998
+    a_out_lib: ['lodash'],
+    b_react_vendor: [
       'react',
       'react-dom',
       'react-router',
       'redux',
       'react-redux',
-      //'react-router-redux',
+      'react-router-redux'
     ],
     z_app: "./app.jsx"
   },
@@ -112,6 +125,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
+      '__ROOT__' : path.join(__dirname, './src')
     }
   },
   postcss: [

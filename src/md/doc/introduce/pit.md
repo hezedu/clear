@@ -7,4 +7,7 @@
 
 在babel es6环境下: `import Test from './Test'`=`var Test = require(./Test).default`, 而不是 `var Test = require(./Test)`
 
+React `class extends Component` 没有`isMounted()` 方法。
+React `class extends Component` 需要用到`::`，比如`onClick={::this.clickHandler}`, 而createClass不需要(会发出警告)。
+
 ***最后编辑:2016/9/16***

@@ -7,7 +7,7 @@
 
 在babel es6环境下: `import Test from './Test'`=`var Test = require(./Test).default`, 而不是 `var Test = require(./Test)`
 
-React `class extends Component` 没有`isMounted()` 方法。
-React `class extends Component` 需要用到`::`，比如`onClick={::this.clickHandler}`, 而createClass不需要(会发出警告)。
+**webpack** `CommonsChunkPlugin`会在排在最后的一个文件里注入一些它自己的代码，比如`window["webpackJsonp"]`什么的。所以防止文件变动，最一个文件不要变。(比如下在的`a_out_lib`)
+`new webpack.optimize.CommonsChunkPlugin({names: ['b_react_vendor', 'a_out_lib'], filename: 'bundleName'})`
 
 ***最后编辑:2016/9/16***

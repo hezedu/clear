@@ -8,12 +8,12 @@ export const navRoutes = [
         childRoutes:[
         ]},
       {path: 'introduce',  title: '项目介绍', firstChildIndex: true,
-      childRoutes:[
-        {path: 'env', component: layout.Main, title: '环境'},
-        //{path: 'build', component: layout.Main, title: '构建命令'},
-        {path: 'list', component: layout.Main, title: '目录'},
-        {path: 'pit', component: layout.Main,  title: '开发注意事项' }
-      ]}
+        childRoutes:[
+          {path: 'env', component: layout.Main, title: '环境'},
+          //{path: 'build', component: layout.Main, title: '构建命令'},
+          {path: 'list', component: layout.Main, title: '目录'},
+          {path: 'pit', component: layout.Main,  title: '开发注意事项' }
+        ]}
     ]},
   {path: 'build', component: layout.Main,  title: 'build' },
   {path: 'features', component: layout.Main,  title: '特性' },
@@ -38,7 +38,7 @@ export default {
   childRoutes: [
     { component: layout.Top,
       indexRoute: {component: layout.Home },
-    childRoutes:navRoutes},
+      childRoutes:navRoutes},
     { path: '*', component: layout.Error}
   ]
 };

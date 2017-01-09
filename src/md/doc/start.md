@@ -21,8 +21,8 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 ### 编辑器
 
 需要支持 **jsx** 语法高亮,  **eslint** 语法检查。<br>
-比如: **Atom** 编缉器: 在设置 -> install里搜：`linter`、`linter-eslint`、`language-javascript-jsx` 就可以了。<br>
- [Atom下载](https://atom.io/)
+比如: **Visual Studio Code** 编缉器: 在扩展里搜：`eslint`装上就可以了。<br>
+ [Visual Studio Code下载](https://code.visualstudio.com/)
 
 # 安装
 [下载项目](https://github.com/hezedu/clear/archive/master.zip)

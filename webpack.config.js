@@ -9,11 +9,15 @@ var isPro = process.env.NODE_ENV === 'production';
 var bundleName = conf.bundleName;
 var chunkName = conf.chunkName;
 
+var confStaticPath = conf.staticPath || ''
 var baseStatic;
-if(/(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?/.test(conf.staticPath)) { //是否为URL.
-  baseStatic = conf.staticPath;
-}else{
+if(/(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?/
+.test(confStaticPath)) { //是否为URL.
+  baseStatic = confStaticPath;
+}else if(confStaticPath[0] !== '/'){
   baseStatic  = conf.baseUrl + conf.staticPath;
+}else{
+  baseStatic = confStaticPath;
 }
 
 var outputPath = path.join(__dirname, conf.indexDir + conf.staticPath + '/' + confName);

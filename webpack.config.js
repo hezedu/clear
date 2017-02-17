@@ -15,7 +15,7 @@ if(/(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9
 .test(confStaticPath)) { //是否为URL.
   baseStatic = confStaticPath;
 }else if(confStaticPath[0] !== '/'){
-  baseStatic  = conf.baseUrl + conf.staticPath;
+  baseStatic  = conf.baseUrl + '/' + conf.staticPath;
 }else{
   baseStatic = confStaticPath;
 }

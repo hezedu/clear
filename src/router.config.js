@@ -10,7 +10,7 @@ export const navRoutes = [
       {path: 'introduce',  title: '项目介绍', firstChildIndex: true,
         childRoutes:[
           {path: 'env', component: layout.Main, title: '环境'},
-          {path: 'config', component: layout.Main, title: 'config文件说明'},
+          //{path: 'config', component: layout.Main, title: 'config文件说明'},
           {path: 'list', component: layout.Main, title: '目录'},
           {path: 'pit', component: layout.Main,  title: '开发注意事项' }
         ]}

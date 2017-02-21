@@ -13,7 +13,5 @@ App开始的根路径。比如https://hezedu.github.io/clear的**/clear**就是`
 - 其它将会和`baueUrl`相加： `baseUrl` + `/` + `staticPath`
 比如：`baseUrl` = **/clear**, `staticPath` = **static**, 那么`BASE_STATIC` = **/clear/static**
 
-**注意：**`staticPath`会影响到webpack的`publicPath`。build出的文件`url`路径会在`staticPath`之后。
-
 ### indexData
 自定义注入到首页模版的数据。

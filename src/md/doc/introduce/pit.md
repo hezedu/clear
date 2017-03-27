@@ -7,7 +7,7 @@
 
 在babel es6环境下: `import Test from './Test'`=`var Test = require(./Test).default`, 而不是 `var Test = require(./Test)`
 
-**webpack** `CommonsChunkPlugin`会在排在最后的一个文件里注入一些它自己的代码，比如`window["webpackJsonp"]`什么的。所以防止文件变动，最一个文件不要变。(比如下在的`a_out_lib`)
+**webpack** `CommonsChunkPlugin`会在排在最后的一个文件里注入一些它自己的代码，比如`window["webpackJsonp"]`什么的。所以防止文件变动，最后一个文件不要变。(比如下在的`a_out_lib`)
 `new webpack.optimize.CommonsChunkPlugin({names: ['b_react_vendor', 'a_out_lib'], filename: 'bundleName'})`
 
-***最后编辑:2016/9/16***
+但是如果名字使用`[chunkhash]`的话，最后一个文件里面内容没变化但**名子（hash值）改变**。What happened ? 又是一个BUG么？ 现在解决方法是在最后加空的`a_1_mainifest`，这样尽可能的将变动减少到最小。

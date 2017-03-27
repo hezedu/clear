@@ -27,8 +27,9 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 # 安装
 [下载项目](https://github.com/hezedu/clear/archive/master.zip)
 ### 然后跳转到项目目录下
+请尽可能的保持node , npm , 由其是cnpm 在一个较新的版本, 否则可能安装失败。
 ```
-npm install
+cnpm install
 ```
 ### 启动
 ```

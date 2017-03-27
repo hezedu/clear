@@ -10,4 +10,4 @@
 
 所以在本项目中你远不用担心200多kb的vendor会变化。
 
-而webpack孤魂野鬼似的`chunk`文件仍然会***链式change*** 。根据webpack作者返馈，**webpack 2**仍会用数组索引。
+而webpack孤魂野鬼似的`chunk`文件仍然会***链式change*** 。根据webpack作者返馈，**webpack 2**仍会用数组索引。本人将会站在http缓存的角度关注的。

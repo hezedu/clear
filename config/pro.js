@@ -3,7 +3,6 @@ var base = require('./dev');
 
 const conf = {
   indexDir: './dist',
-  staticPath : '',
   baseUrl: ''
 };
 

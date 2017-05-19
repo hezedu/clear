@@ -9,24 +9,17 @@ var isPro = process.env.NODE_ENV === 'production';
 var bundleName = conf.bundleName;
 var chunkName = conf.chunkName;
 
-var confStaticPath = conf.staticPath || ''
-var baseStatic;
-if(/(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?/
-.test(confStaticPath)) { //是否为URL.
-  baseStatic = confStaticPath;
-}else if(confStaticPath[0] !== '/'){
-  baseStatic  = conf.baseUrl + '/' + conf.staticPath;
-  baseStatic = (baseStatic === '/') ? '' : baseStatic;
+var outputPath, publicPath;
+if(confName === 'dev' && !isPro){ //使用 命令weblack
+  outputPath = path.join(__dirname, conf.indexDir, '/dist/dev/build');
+  publicPath = conf.baseUrl + '/dist/dev/build/';
 }else{
-  baseStatic = confStaticPath;
+  outputPath = path.join(__dirname, conf.indexDir, '/build');
+  publicPath = conf.baseUrl + '/build/';
 }
-
-var outputPath = path.join(__dirname, conf.indexDir + conf.staticPath + '/' + confName);
-var publicPath = baseStatic + '/' + confName + '/';
 
 var indexData = conf.indexData || {};
 indexData.BASE_URL = conf.baseUrl;
-indexData.BASE_STATIC = baseStatic;
 indexData.VERSION = pageage.version;
 
 // ***************************** plugins *****************************

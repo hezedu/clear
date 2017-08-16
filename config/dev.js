@@ -5,6 +5,7 @@ var  conf = {
   staticPath : '',     //本地static目录。 也可以是静态服务器URL比如: https://xxxcdn.com/rtmap
   baseUrl: '',    //网站基本url. 比如：https://hezedu.github.io/clear 的 /clear
   indexData: { //这里数据将会传给index.ejs。
+    BASE_STATIC:''
     //build时传自动添加：BASE_URL,BASE_STATIC两个属性。
   }
 };

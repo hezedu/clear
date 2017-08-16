@@ -20,7 +20,7 @@ if(confName === 'dev' && !isPro){ //使用 命令weblack
 }else{
   outputPath = path.join(__dirname, conf.indexDir, '/dist/pro/build');
   publicPath = conf.baseUrl + '/dist/pro/build/';
-  indexData.BASE_STATIC = conf.baseUr + '/dist';
+  indexData.BASE_STATIC = conf.baseUrl + '/dist';
 }
 
 

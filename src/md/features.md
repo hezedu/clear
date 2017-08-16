@@ -1,5 +1,5 @@
 # vendor固定
-本项目优先关注于http缓存，因此发现webpack自身缺陷：它使用数组索引，导致build出的文件飘忽不定，hash随便变化。比如vendor会受到app改动、`code-spiiting`的新chunk的影响。
+本项目优先关注于http缓存，因此发现webpack自身严重缺陷：它使用数组索引，导致build出的文件飘忽不定，hash随便变化。比如vendor会受到app改动、`code-spiiting`的新chunk的影响。
 详见：<a href="https://github.com/webpack/webpack/issues/1315" target="_blank">Vendor chunkhash changes when app code changes</a>
 
 此bug已由本人在当前版本 **1.13.2**使用  ***key sort***的方法hack。详见：

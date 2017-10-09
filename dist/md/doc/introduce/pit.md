@@ -7,6 +7,12 @@
 
 在babel es6环境下: `import Test from './Test'`=`var Test = require(./Test).default`, 而不是 `var Test = require(./Test)`
 
+```js
+var abc = 'abc';
+function fn(){
+  console.log('highlight')
+}
+```
 **webpack** `CommonsChunkPlugin`会在排在最后的一个文件里注入一些它自己的代码，比如`window["webpackJsonp"]`什么的。所以防止文件变动，最后一个文件不要变。(比如下在的`a_out_lib`)
 `new webpack.optimize.CommonsChunkPlugin({names: ['b_react_vendor', 'a_out_lib'], filename: 'bundleName'})`
 

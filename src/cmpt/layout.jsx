@@ -123,6 +123,7 @@ export class Left extends Component {
 // require('highlight.js/styles/github.css');
 // hljs.registerLanguage('js', require('highlight.js/lib/languages/javascript'));
 // hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
+var md = window.markdownit();
 export class Main extends Component {
   state = {
     html: ''
@@ -130,16 +131,15 @@ export class Main extends Component {
   loadHtml(props){
     props = props || this.props;
     const self = this;
-    const {$, markdown } = window;
+    const {$} = window;
     const path = props.filePath || props.route.link || props.route.path;
     $.ajax({
       url: `/md${path}.md`,
       dataType: 'text',
       success(data){
         self.setState({
-          html: markdown.toHTML(data)
+          html: md.render(data)
         })
-        self.highlight();
         //console.log('data', data);
       }
     })
@@ -159,9 +159,9 @@ export class Main extends Component {
   componentWillReceiveProps(props){
     this.loadHtml(props);
   }
-  // componentDidUpdate(){
-  //   this.loadHtml();
-  // }
+  componentDidUpdate(){
+    this.highlight();
+  }
   render() {
     if(this.props.children){
       return this.props.children;

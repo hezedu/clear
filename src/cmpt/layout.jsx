@@ -127,10 +127,11 @@ export class Main extends Component {
   state = {
     html: ''
   }
-  loadHtml(){
+  loadHtml(props){
+    props = props || this.props;
     const self = this;
     const {$, markdown } = window;
-    const path = this.props.filePath || this.props.route.link || this.props.route.path;
+    const path = props.filePath || props.route.link || props.route.path;
     $.ajax({
       url: `/md${path}.md`,
       dataType: 'text',
@@ -155,8 +156,8 @@ export class Main extends Component {
     this.loadHtml();
   }
 
-  componentWillReceiveProps(){
-    this.loadHtml();
+  componentWillReceiveProps(props){
+    this.loadHtml(props);
   }
   // componentDidUpdate(){
   //   this.loadHtml();

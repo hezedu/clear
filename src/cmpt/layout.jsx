@@ -1,18 +1,19 @@
-import { Component, PropTypes} from 'react';
+import { Component} from 'react';
 import { Link } from 'react-router';
 import style from '../css/style.scss';
 import NavTree from './tree.jsx';
-import {navRoutes} from '../router.config';
+import * as routes from '../router.config';
 import find from 'lodash/find';
 import virgin from 'virgin';
 //======================router======================
 export class Root extends Component {
-  static contextTypes = {
-    router: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
-  };
+  // static contextTypes = {
+  //   router: PropTypes.object.isRequired,
+  //   location: PropTypes.object.isRequired
+  // };
   componentWillMount(){
-    virgin.router = this.context.router;
+    virgin.history = this.props.history;
+    virgin.router = this.props.router;
     virgin.location = this.props.location;
   }
   render() {
@@ -28,7 +29,7 @@ function topNavOnEnter (nextState, replace){
 export class Top extends Component {
   NavList(){
     const arr = [];
-    navRoutes.forEach((v, i) => {
+    routes.navRoutes.forEach((v, i) => {
       if(v.path){
         v.path = v.path[0] !== '/' ? `/${v.path}` : v.path;
         if(typeof v.firstChildIndex && v.childRoutes && v.childRoutes[0]){
@@ -42,6 +43,11 @@ export class Top extends Component {
     });
     return arr;
   }
+  reload(){
+    routes.default.childRoutes = routes.defChildRoutes;
+    const {history , location} = virgin;
+    history.replace(location.pathname);
+  }
   render() {
     return (
       <div className='height100'>
@@ -51,6 +57,7 @@ export class Top extends Component {
             {this.NavList()}
           </div>
           <div className={style.topRightBar}>
+          <button onClick={this.reload}>reload</button>
           <a href='https://github.com/hezedu/clear' target="_blank" className={style.githubIcon}>
           <img src={window.SERVER_CONFIG.BASE_STATIC + '/static/pinned-octocat.svg'} />
           </a>
@@ -88,7 +95,7 @@ export class Left extends Component {
     const key = this.props.route.path;
     const prop = {
       rootPath: key,
-      list: find(navRoutes, {path: key}).childRoutes
+      list: find(routes.navRoutes, {path: key}).childRoutes
     };
     return <NavTree {...prop} />;
   }

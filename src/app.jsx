@@ -10,7 +10,7 @@ let history = useRouterHistory(createHashHistory)({queryKey: false});
 history = syncHistoryWithStore(history, routingStore);
 
 import AppRoutes from './router.config';
-console.log('remove console test')
+
 ReactDOM.render(
   <Provider store={routingStore}>
     <Router history={history} routes={AppRoutes} />

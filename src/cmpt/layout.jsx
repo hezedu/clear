@@ -118,32 +118,55 @@ export class Left extends Component {
 // const hljs = {
 //   initHighlighting: function(){}
 // };
-const hljs = require('highlight.js/lib/highlight');
-require('github-markdown-css');
-require('highlight.js/styles/github.css');
-hljs.registerLanguage('js', require('highlight.js/lib/languages/javascript'));
-hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
+// const hljs = require('highlight.js/lib/highlight');
+// require('github-markdown-css');
+// require('highlight.js/styles/github.css');
+// hljs.registerLanguage('js', require('highlight.js/lib/languages/javascript'));
+// hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
 export class Main extends Component {
+  state = {
+    html: ''
+  }
   loadHtml(){
+    const self = this;
+    const {$, markdown } = window;
     const path = this.props.filePath || this.props.route.link || this.props.route.path;
-    const html = require(`../md${path}.md`);
-    return html;
+    $.ajax({
+      url: `/md${path}.md`,
+      dataType: 'text',
+      success(data){
+        self.setState({
+          html: markdown.toHTML(data)
+        })
+        self.highlight();
+        //console.log('data', data);
+      }
+    })
+    // const html = require(`../md${path}.md`);
+    // return html;
   }
-  //state = { html:'' }
-  componentDidMount(){
+  highlight(){
+    const hljs = window.hljs;
     hljs.initHighlighting.called = false;
     hljs.initHighlighting();
   }
-  componentDidUpdate(){
-    hljs.initHighlighting.called = false;
-    hljs.initHighlighting();
+
+  componentWillMount(){
+    this.loadHtml();
   }
+
+  componentWillReceiveProps(){
+    this.loadHtml();
+  }
+  // componentDidUpdate(){
+  //   this.loadHtml();
+  // }
   render() {
     if(this.props.children){
       return this.props.children;
     }
     return (
-      <div className='markdown-body' dangerouslySetInnerHTML={{__html:this.loadHtml()}}/>
+      <div className='markdown-body' dangerouslySetInnerHTML={{__html:this.state.html}}/>
     );
   }
 }

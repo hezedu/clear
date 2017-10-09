@@ -15,9 +15,12 @@ export default class extends Component {
   initLeftTree(arr){
     if(arr){
       arr.forEach(v => {
-        v.component = layout.Main;
-        v.firstChildIndex = true;
         let child = v.childRoutes;
+        if(child){
+          v.firstChildIndex = true;
+        }else{
+          v.component = layout.Main;
+        }
         this.initLeftTree(child);
       })
     }

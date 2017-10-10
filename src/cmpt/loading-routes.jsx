@@ -1,6 +1,5 @@
 import { Component , PropTypes} from 'react';
 import * as layout from '../cmpt/layout';
-//import * as routes from '../router.config';
 import * as routes from '../router.config';
 
 export default class extends Component {
@@ -35,6 +34,7 @@ export default class extends Component {
         const navRoutes = self.getNavRoutes(data);
         routes.navRoutes = navRoutes;
         routes.default.childRoutes =  [{
+          path: '/',
           component: layout.Top,
           indexRoute: {
             component: layout.Home
@@ -70,7 +70,7 @@ export default class extends Component {
   }
   render(){
     return (
-      <h1>正在加载。。。</h1>
+      <div>正在加载。。。</div>
     );
   }
 }

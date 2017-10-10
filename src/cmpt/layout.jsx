@@ -75,16 +75,17 @@ export class Top extends Component {
 export class Home extends Component {
   render() {
     return (
-      <div className={style.homeTitle}>
-        <big>Clear</big><small>前端架构</small>
-        <br/>
-        <a href='http://webpack.github.io/docs/' target='_blank'>webpack</a>
-         + <a href='http://sass-lang.com/documentation/file.SASS_REFERENCE.html#css_extensions' target='_blank'>sass</a>
-         + <a href='http://simplaio.github.io/rucksack/docs/#autoprefixing' target='_blank'>possCss</a>
-         + <a href='https://github.com/reactjs/react-router/tree/master/docs' target='_blank'>react-router</a>
-         + <a href='https://facebook.github.io/react/docs/getting-started.html' target='_blank'>react</a>
-         + <a href='http://redux.js.org/index.html' target='_blank'>redux</a>
-        </div>
+      <Main filePath= '/index' />
+      // <div className={style.homeTitle}>
+      //   <big>Clear</big><small>前端架构</small>
+      //   <br/>
+      //   <a href='http://webpack.github.io/docs/' target='_blank'>webpack</a>
+      //    + <a href='http://sass-lang.com/documentation/file.SASS_REFERENCE.html#css_extensions' target='_blank'>sass</a>
+      //    + <a href='http://simplaio.github.io/rucksack/docs/#autoprefixing' target='_blank'>possCss</a>
+      //    + <a href='https://github.com/reactjs/react-router/tree/master/docs' target='_blank'>react-router</a>
+      //    + <a href='https://facebook.github.io/react/docs/getting-started.html' target='_blank'>react</a>
+      //    + <a href='http://redux.js.org/index.html' target='_blank'>redux</a>
+      //   </div>
     );
   }
 }

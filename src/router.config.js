@@ -4,6 +4,6 @@ import LoadingRoutes from './cmpt/loading-routes';
 export const navRoutes = [];
 export const defChildRoutes = [{ path: '*', component: LoadingRoutes}];
 export default {
-  path: '/', component: layout.Root,
+  component: layout.Root,
   childRoutes: defChildRoutes
 };

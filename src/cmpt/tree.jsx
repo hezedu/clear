@@ -11,13 +11,17 @@ export default class extends Component {
     routes: PropTypes.optionalArray,
     rootPath: PropTypes.optionalString
   }
+  handleClick(e){
+    e.preventDefault();
+    console.log(e);
+  }
   render(){
     //console.log('this.props', this.props);
-    return <ul>{tree(this.props.list, this.props.rootPath)}</ul>;
+    return <ul>{tree(this.props.list, this.props.rootPath, this)}</ul>;
   }
 }
 
-const tree = (arr, rpath) => {
+const tree = (arr, rpath, self) => {
   const arr2 = [];
   arr.forEach((v, i) => {
     v.link = `${rpath}/${v.path}`;
@@ -30,7 +34,11 @@ const tree = (arr, rpath) => {
     if(v.component){
       LinkOrNode = <Link to={v.link} activeClassName={style.active} onlyActiveOnIndex={true}>{v.title}</Link>;
     }else{
-      LinkOrNode = <div className="clear-tree-node">{v.title}</div>;
+      //LinkOrNode = <div className="clear-tree-node">{v.title}</div>;
+      LinkOrNode = <Link to={v.link}
+      activeClassName={style.active} onClick={self.handleClick}>
+        {v.title}
+      </Link>;
     }
     arr2[i] = (
       <li key={v.path}>

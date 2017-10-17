@@ -15,7 +15,16 @@ $leftAHeight:35px;
   input{padding-left:.5em}
   hr{border-color: #fff}
   .note{color:$leftColor}
-  .clear-tree-node{padding-left:10px;color:$midColor2;height: 35px;line-height: 35px}
+  .clear-tree-node{
+    padding-left:10px;
+    color:$midColor2;
+    height: 35px;line-height: 35px;
+  }
+  .clear-tree-node-fold{
+    padding-left:10px;
+    color:$midColor2;
+    height: 35px;line-height: 35px;
+  }
 }
 
 .btn{padding:5px 10px;cursor: pointer}
@@ -52,8 +61,12 @@ $leftAHeight:35px;
 .main hr{margin: 10px 0;}
 .leftNav{width: $leftWidth;height: 100%;position: fixed;top:$topH;left:0;z-index: 2;padding-top: 10px;
 background-color: $midColor}
-.leftNav a{color:$color;display: block; height: $leftAHeight;
-  line-height: $leftAHeight;padding-left:10px;}
+.leftNav a{color:$color;
+  display: block;
+  height: $leftAHeight;
+  line-height: $leftAHeight;
+  padding-left:10px;
+}
 .leftNav li{display: block;};
 .leftNav>ul ul{margin-left: 1em}
 .leftNav a.active, .leftNav a:hover{background-color: $color;color:$topColor}

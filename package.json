@@ -24,6 +24,7 @@
     "react-router": "^2.7.0",
     "react-router-redux": "^4.0.7",
     "redux": "^3.5.2",
+    "sas": "^3.0.4",
     "virgin": "^1.0.1"
   },
   "devDependencies": {

@@ -3,7 +3,6 @@ import * as layout from '../cmpt/layout';
 import * as routes from '../router.config';
 import {forMatData, initRouter } from './util';
 
-
 export default class extends Component {
   state = {
     list:[],
@@ -29,6 +28,8 @@ export default class extends Component {
   }
   getData(){
     const self = this;
+    const projectId = self.props.params.id;
+    console.log('projectId', projectId)
     // window.$.ajax({
     //
     // });
@@ -37,17 +38,13 @@ export default class extends Component {
       console.log('data', data)
       data = forMatData(data);
       console.log('data', data)
-      data = initRouter(data);
-      console.log('data', data)
+      data = initRouter(data, '/' + projectId);
+      console.log('initRouter data', data);
       const navRoutes = self.getNavRoutes(data);
       routes.navRoutes = navRoutes;
       routes.default.childRoutes =  [{
-        path: '/',
-        indexRoute: {
-          component: layout.Home
-        },
+        path: ':id',
         component: layout.Top,
-
         childRoutes: navRoutes
       },
       { path: '*', component: layout.Error}

@@ -29,24 +29,26 @@ function topNavOnEnter (nextState, replace){
 export class Top extends Component {
   NavList(){
     const arr = [];
-    routes.navRoutes.forEach((v, i) => {
+    routes.navRoutes.forEach((v) => {
       if(v.path){
-        v.path = v.path[0] !== '/' ? `/${v.path}` : v.path;
         if(v.firstChildIndex && v.childRoutes && v.childRoutes[0]){
           v.indexRoute = {
-            IndexRedirect : v.path + '/' + (v.childRoutes[0].path || ''),
+            IndexRedirect : v.childRoutes[0].link,
             onEnter : topNavOnEnter
           };
         }
-        arr.push(<Link to={v.path} key={v.path + i} activeClassName={style.active}>{v.title}</Link>);
+        arr.push(<Link to={v.link} key={v.link} activeClassName={style.active}>{v.title}</Link>);
       }
     });
     return arr;
   }
   reload(){
     routes.default.childRoutes = routes.defChildRoutes;
-    const {history , location} = virgin;
-    history.replace(location.pathname);
+    // const {history , location} = virgin;
+    // history.replace(location.pathname);
+  }
+  componentWillUnmount(){
+    this.reload();
   }
   render() {
     return (
@@ -57,10 +59,10 @@ export class Top extends Component {
             {this.NavList()}
           </div>
           <div className={style.topRightBar}>
-          <button className='clear-reload' onClick={this.reload}>reload</button>
-          <a href='https://github.com/hezedu/clear/tree/doc-new' target="_blank" className={style.githubIcon}>
-          <img src={window.SERVER_CONFIG.BASE_STATIC + '/static/pinned-octocat.svg'} />
-          </a>
+            <button className='clear-reload' onClick={this.reload}>reload</button>
+            <a href='https://github.com/hezedu/clear/tree/doc-new' target="_blank" className={style.githubIcon}>
+              <img src={window.SERVER_CONFIG.BASE_STATIC + '/static/pinned-octocat.svg'} />
+            </a>
           </div>
         </div>
         <div className={style.bottomWarp}>
@@ -92,19 +94,23 @@ export class Home extends Component {
   render() {
     const arr = this.getList()
     return (
-      <div className='markdown-body' style={{fontSize:"1.2em"}}>
-        <ul>{arr}</ul>
+      <div className='height100'>
+        <div className={style.topNavWarp}>
+          <Link className={style.title} to="/" activeClassName={style.active} onlyActiveOnIndex={true}>Home</Link>
+          <div className={style.topRightBar}>
+            <button className='clear-reload' onClick={this.reload}>reload</button>
+            <a href='https://github.com/hezedu/clear/tree/doc-new' target="_blank" className={style.githubIcon}>
+              <img src={window.SERVER_CONFIG.BASE_STATIC + '/static/pinned-octocat.svg'} />
+            </a>
+          </div>
+        </div>
+        <div className={style.bottomWarp}>
+          <div className='markdown-body clear-index' style={{fontSize:"1.2em"}}>
+            <ul>{arr}</ul>
+          </div>
+        </div>
       </div>
-      // <div className={style.homeTitle}>
-      //   <big>Clear</big><small>前端架构</small>
-      //   <br/>
-      //   <a href='http://webpack.github.io/docs/' target='_blank'>webpack</a>
-      //    + <a href='http://sass-lang.com/documentation/file.SASS_REFERENCE.html#css_extensions' target='_blank'>sass</a>
-      //    + <a href='http://simplaio.github.io/rucksack/docs/#autoprefixing' target='_blank'>possCss</a>
-      //    + <a href='https://github.com/reactjs/react-router/tree/master/docs' target='_blank'>react-router</a>
-      //    + <a href='https://facebook.github.io/react/docs/getting-started.html' target='_blank'>react</a>
-      //    + <a href='http://redux.js.org/index.html' target='_blank'>redux</a>
-      //   </div>
+
     );
   }
 }
@@ -112,10 +118,10 @@ export class Home extends Component {
 //======================左导航======================
 export class Left extends Component {
   mountNav(){
-    const key = this.props.route.path;
+    const key = this.props.route.link;
     const prop = {
       rootPath: key,
-      list: find(routes.navRoutes, {path: key}).childRoutes
+      list: find(routes.navRoutes, {link: key}).childRoutes
     };
     return <NavTree {...prop} />;
   }

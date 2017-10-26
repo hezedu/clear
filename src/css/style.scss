@@ -46,7 +46,14 @@ $leftAHeight:35px;
   .clear-reload{
     margin-right: 4px;padding: 3px;display: none;
   }
+
   .markdown-body{width: 980px;padding:45px;margin: 0 auto;}
+  .clear-index{
+    display: flex; justify-content: center;
+  }
+  .clear-index>ul{
+    padding: 0;
+  }
   // a.clear-tree-node:after{
   //   content: "/";
   // }

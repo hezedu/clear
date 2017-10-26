@@ -16,7 +16,11 @@ function ite(result, rpath, depth){
     if(v){
       obj.childRoutes = ite(v, link, depth + 1);
       if(obj.childRoutes.length){
-        obj.link = obj.childRoutes[0].link;
+        //obj.link = obj.childRoutes[0].link;
+        obj.redirectTo = obj.childRoutes[0].link;
+        console.log('obj', obj);
+        console.log('obj.childRoutes[0].link',
+        obj.childRoutes[0].link);
       }
     }
     obj.path = i;

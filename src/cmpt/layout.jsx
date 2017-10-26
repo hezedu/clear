@@ -32,7 +32,7 @@ export class Top extends Component {
     routes.navRoutes.forEach((v, i) => {
       if(v.path){
         v.path = v.path[0] !== '/' ? `/${v.path}` : v.path;
-        if(typeof v.firstChildIndex && v.childRoutes && v.childRoutes[0]){
+        if(v.firstChildIndex && v.childRoutes && v.childRoutes[0]){
           v.indexRoute = {
             IndexRedirect : v.path + '/' + (v.childRoutes[0].path || ''),
             onEnter : topNavOnEnter

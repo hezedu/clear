@@ -16,9 +16,6 @@ export default class extends Component {
     const $next = $dom.next();
     const display = $next.css('display');
     $next.css('display', display === 'block' ? 'none' : 'block');
-    // if($dom.hasClass('clear-tree-node-active')){
-    //   console.log('display', display);
-    // }
     e.preventDefault();
   }
 

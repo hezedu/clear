@@ -52,13 +52,13 @@ export class Top extends Component {
     return (
       <div className='height100'>
         <div className={style.topNavWarp}>
-          <Link className={style.title} to="/">Home</Link>
+          <Link className={style.title} to="/" activeClassName={style.active} onlyActiveOnIndex={true}>Home</Link>
           <div className={style.topNav}>
             {this.NavList()}
           </div>
           <div className={style.topRightBar}>
-          <button onClick={this.reload}>reload</button>
-          <a href='https://github.com/hezedu/clear' target="_blank" className={style.githubIcon}>
+          <button className='clear-reload' onClick={this.reload}>reload</button>
+          <a href='https://github.com/hezedu/clear/tree/doc-new' target="_blank" className={style.githubIcon}>
           <img src={window.SERVER_CONFIG.BASE_STATIC + '/static/pinned-octocat.svg'} />
           </a>
           </div>
@@ -73,9 +73,28 @@ export class Top extends Component {
 
 //======================默认首页======================
 export class Home extends Component {
+  state = {
+    data: []
+  }
+  getData(){
+    setTimeout(() => {
+      this.setState({data: devProjectsData()})
+    }, 200);
+  }
+  componentWillMount(){
+    this.getData();
+  }
+  getList(){
+    return this.state.data.map(v => {
+      return (<li key={v.id}><Link to={"/" + v.id}>{v.name}</Link></li>)
+    })
+  }
   render() {
+    const arr = this.getList()
     return (
-      <Main filePath= '/index' />
+      <div className='markdown-body' style={{fontSize:"1.2em"}}>
+        <ul>{arr}</ul>
+      </div>
       // <div className={style.homeTitle}>
       //   <big>Clear</big><small>前端架构</small>
       //   <br/>
@@ -185,4 +204,8 @@ export class Error extends Component {//router
       </div>
     );
   }
+}
+
+function devProjectsData(){
+  return [{"id":15,"http_url_to_repo":"http://localhost:10080/RD/Even_Miniprog.git","web_url":"http://localhost:10080/RD/Even_Miniprog","name":"Even_Miniprog","name_with_namespace":"RD / Even_Miniprog","path":"Even_Miniprog","path_with_namespace":"RD/Even_Miniprog"},{"id":14,"http_url_to_repo":"http://localhost:10080/duwei/doc2.git","web_url":"http://localhost:10080/duwei/doc2","name":"doc2","name_with_namespace":"都威 / doc2","path":"doc2","path_with_namespace":"duwei/doc2"},{"id":13,"http_url_to_repo":"http://localhost:10080/RD/Even_Bond_Miniprog.git","web_url":"http://localhost:10080/RD/Even_Bond_Miniprog","name":"Even_Bond_Miniprog","name_with_namespace":"RD / Even_Bond_Miniprog","path":"Even_Bond_Miniprog","path_with_namespace":"RD/Even_Bond_Miniprog"},{"id":11,"http_url_to_repo":"http://localhost:10080/RD/Even_Official.git","web_url":"http://localhost:10080/RD/Even_Official","name":"Even_Official","name_with_namespace":"RD / Even_Official","path":"Even_Official","path_with_namespace":"RD/Even_Official"},{"id":10,"http_url_to_repo":"http://localhost:10080/RD/Even_Bond_Backend.git","web_url":"http://localhost:10080/RD/Even_Bond_Backend","name":"Even_Bond_Backend","name_with_namespace":"RD / Even_Bond_Backend","path":"Even_Bond_Backend","path_with_namespace":"RD/Even_Bond_Backend"},{"id":9,"http_url_to_repo":"http://localhost:10080/RD/Even_Bond.git","web_url":"http://localhost:10080/RD/Even_Bond","name":"Even_Bond_Frontend","name_with_namespace":"RD / Even_Bond_Frontend","path":"Even_Bond","path_with_namespace":"RD/Even_Bond"},{"id":8,"http_url_to_repo":"http://localhost:10080/liujie/lp_chengan_html.git","web_url":"http://localhost:10080/liujie/lp_chengan_html","name":"lp_chengan_html","name_with_namespace":"liujie / lp_chengan_html","path":"lp_chengan_html","path_with_namespace":"liujie/lp_chengan_html"},{"id":6,"http_url_to_repo":"http://localhost:10080/RD/Even_LP.git","web_url":"http://localhost:10080/RD/Even_LP","name":"Even_LP","name_with_namespace":"RD / Even_LP","path":"Even_LP","path_with_namespace":"RD/Even_LP"},{"id":5,"http_url_to_repo":"http://localhost:10080/RD/even-admin.git","web_url":"http://localhost:10080/RD/even-admin","name":"Even_admin","name_with_namespace":"RD / Even_admin","path":"even-admin","path_with_namespace":"RD/even-admin"},{"id":1,"http_url_to_repo":"http://localhost:10080/RD/Even.git","web_url":"http://localhost:10080/RD/Even","name":"Even","name_with_namespace":"RD / Even","path":"Even","path_with_namespace":"RD/Even"}]
 }

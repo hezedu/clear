@@ -9,7 +9,7 @@ $bgColor:#fff;
 $borderColor:#ddd;
 
 $topH : 50px;
-$leftWidth:200px;
+$leftWidth:260px;
 $leftAHeight:35px;
 *{margin: 0; padding: 0;box-sizing: border-box;}
 :global {
@@ -22,17 +22,40 @@ $leftAHeight:35px;
 
   a.clear-tree-node{
     padding-left:10px;
-    //color: #000!important;
-    //color:#000!important;
-    //background-color: dodgerblue;
-    font-weight: bold;
-    font-size: 1.3em;
+    font-size: 1.5em;
     height: 35px;line-height: 35px;
+    //display: flex!important;
+    justify-content: space-between;
+    align-items: center;
   }
-
+  // .clear-triangle{
+  //   display: block;
+  //   width: 0;
+  //   height: 0;
+  //   content: "";
+  //   border: 5px solid;
+  //   border-left-color: $defColor;
+  //   border-top-color: transparent;
+  //   border-bottom-color: transparent;
+  //   border-left-color: transparent;
+  //   margin-right: 4px;
+  // }
   a.clear-tree-node:hover, a.clear-tree-node:active, a.clear-tree-node-active{
     color:$activeColor!important;
   }
+  .clear-reload{
+    margin-right: 4px;padding: 3px;display: none;
+  }
+  .markdown-body{width: 980px;padding:45px;margin: 0 auto;}
+  // a.clear-tree-node:after{
+  //   content: "/";
+  // }
+  // a.clear-tree-node-active .clear-triangle{
+  //   border-top-color: $activeColor;
+  //   border-right-color: transparent;
+  //   border-bottom-color: transparent;
+  //   border-left-color: transparent;
+  // }
   // a.clear-tree-node + ul{
   //   display: none;
   // }
@@ -72,6 +95,9 @@ $leftAHeight:35px;
 .title{padding:0 10px;left:0;
   color:$defColor;position: absolute;
   display: block;font-size:1.2em;}
+.title.active{
+    color: $activeColor;
+  }
 .topNav{padding-left: 20px}
 .topNav a{color:$defColor; display: block;float: left; margin:0 10px;padding: 0 20px}
 .topNav a.active, .topNav a:hover{background: $bgColor; color:$activeColor}
@@ -85,14 +111,14 @@ $leftAHeight:35px;
   height: 100%;
   position: relative;
 }
-.bottomWarp>:global(.markdown-body){width: 980px;padding:45px;margin: 0 auto;}
+//.bottomWarp>:global(.markdown-body){width: 980px;padding:45px;margin: 0 auto;}
 
 .mainWarp{
   padding-left:$leftWidth;
   width:100%; position: relative;
   height: 100%;
 }
-.mainWarp>:global(.markdown-body){padding:10px 40px 80px;}
+//.mainWarp>:global(.markdown-body){padding:10px 40px 80px;}
 .main hr{margin: 10px 0;}
 .leftNav{width: $leftWidth;
   height: 100%;position: fixed;

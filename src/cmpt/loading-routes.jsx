@@ -43,10 +43,11 @@ export default class extends Component {
       routes.navRoutes = navRoutes;
       routes.default.childRoutes =  [{
         path: '/',
-        component: layout.Top,
         indexRoute: {
           component: layout.Home
         },
+        component: layout.Top,
+
         childRoutes: navRoutes
       },
       { path: '*', component: layout.Error}

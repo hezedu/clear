@@ -74,7 +74,6 @@ export class Top extends Component {
       url: '/api/v3/projects/' + projectId,
       success(data){
         //console.log('data', data)
-        
         let projectName = self.getProjectName(data.name);
         window.path_with_namespace = data.path_with_namespace;
         window.projectName = projectName;

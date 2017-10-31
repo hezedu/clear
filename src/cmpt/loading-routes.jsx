@@ -109,7 +109,6 @@ export default class extends Component {
       }else{
         navRoutes.push(v);
       }
-      
     });
     return {navRoutes, indexRoute};
   }

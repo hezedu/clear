@@ -23,20 +23,24 @@ export class Root extends Component {
 
 
 //======================上导航======================
-function topNavOnEnter (nextState, replace){
-  replace(this.IndexRedirect);
-}
+// function topNavOnEnter (nextState, replace){
+//   replace(this.IndexRedirect);
+// }
 export class Top extends Component {
+  state = {
+    data: {},
+    isInit: false
+  }
   NavList(){
     const arr = [];
     routes.navRoutes.forEach((v) => {
       if(v.path){
-        if(v.firstChildIndex && v.childRoutes && v.childRoutes[0]){
-          v.indexRoute = {
-            IndexRedirect : v.childRoutes[0].link,
-            onEnter : topNavOnEnter
-          };
-        }
+        // if(v.firstChildIndex && v.childRoutes && v.childRoutes[0]){
+        //   v.indexRoute = {
+        //     IndexRedirect : v.childRoutes[0].link,
+        //     onEnter : topNavOnEnter
+        //   };
+        // }
         arr.push(<Link to={v.link} key={v.link} activeClassName={style.active}>{v.title}</Link>);
       }
     });
@@ -50,11 +54,39 @@ export class Top extends Component {
   componentWillUnmount(){
     this.reload();
   }
+  componentWillMount(){
+    this.getData();
+  }
+  getData(){
+
+    const self = this;
+    const projectId = self.props.params.id;
+    window.$.ajax({
+      url: '/api/v3/projects/' + projectId,
+      success(data){
+        console.log('data', data)
+        window.path_with_namespace = data.path_with_namespace;
+        self.setState({
+          data,
+          isInit: true
+        })
+      }
+    })
+  }
   render() {
+    if(!this.state.isInit){
+      return null;
+    }
+    let name = this.state.data.name || '';
+    name = name.replace('clear-docs-', '');
+
     return (
       <div className='height100'>
         <div className={style.topNavWarp}>
-          <Link className={style.title} to="/" activeClassName={style.active} onlyActiveOnIndex={true}>Home</Link>
+          <div className={style.title}>
+            <Link to='/' style={{fontSize: ".6em"}}>Home</Link>
+            <span className={style.title_name}>{name}</span>
+          </div>
           <div className={style.topNav}>
             {this.NavList()}
           </div>
@@ -79,16 +111,20 @@ export class Home extends Component {
     data: []
   }
   getData(){
-    setTimeout(() => {
-      this.setState({data: devProjectsData()})
-    }, 200);
+    const self = this;
+    window.$.ajax({
+      url: '/api/v3/projects?simple=true&search=clear-docs-',
+      success(data){
+        self.setState({data})
+      }
+    })
   }
   componentWillMount(){
     this.getData();
   }
   getList(){
     return this.state.data.map(v => {
-      return (<li key={v.id}><Link to={"/" + v.id}>{v.name}</Link></li>)
+      return (<li key={v.id}><Link to={"/" + v.id}>{v.name.replace('clear-docs-', '')}</Link></li>)
     })
   }
   render() {
@@ -159,18 +195,22 @@ export class Main extends Component {
     const self = this;
     const {$} = window;
     const path = props.filePath || props.route.link || props.route.path;
+    const projectId = self.props.params.id;
+    let file_path = path + '.md';
+    file_path = file_path.substr(projectId.length + 1);
     $.ajax({
-      url: `/md${path}.md`,
+      url: '/md/' + window.path_with_namespace + '/raw/master' + file_path,
+      // data: {
+      //   file_path,
+      //   ref: "master"
+      // },
       dataType: 'text',
       success(data){
         self.setState({
           html: md.render(data)
         })
-        //console.log('data', data);
       }
     })
-    // const html = require(`../md${path}.md`);
-    // return html;
   }
   highlight(){
     const hljs = window.hljs;
@@ -210,8 +250,4 @@ export class Error extends Component {//router
       </div>
     );
   }
-}
-
-function devProjectsData(){
-  return [{"id":15,"http_url_to_repo":"http://localhost:10080/RD/Even_Miniprog.git","web_url":"http://localhost:10080/RD/Even_Miniprog","name":"Even_Miniprog","name_with_namespace":"RD / Even_Miniprog","path":"Even_Miniprog","path_with_namespace":"RD/Even_Miniprog"},{"id":14,"http_url_to_repo":"http://localhost:10080/duwei/doc2.git","web_url":"http://localhost:10080/duwei/doc2","name":"doc2","name_with_namespace":"都威 / doc2","path":"doc2","path_with_namespace":"duwei/doc2"},{"id":13,"http_url_to_repo":"http://localhost:10080/RD/Even_Bond_Miniprog.git","web_url":"http://localhost:10080/RD/Even_Bond_Miniprog","name":"Even_Bond_Miniprog","name_with_namespace":"RD / Even_Bond_Miniprog","path":"Even_Bond_Miniprog","path_with_namespace":"RD/Even_Bond_Miniprog"},{"id":11,"http_url_to_repo":"http://localhost:10080/RD/Even_Official.git","web_url":"http://localhost:10080/RD/Even_Official","name":"Even_Official","name_with_namespace":"RD / Even_Official","path":"Even_Official","path_with_namespace":"RD/Even_Official"},{"id":10,"http_url_to_repo":"http://localhost:10080/RD/Even_Bond_Backend.git","web_url":"http://localhost:10080/RD/Even_Bond_Backend","name":"Even_Bond_Backend","name_with_namespace":"RD / Even_Bond_Backend","path":"Even_Bond_Backend","path_with_namespace":"RD/Even_Bond_Backend"},{"id":9,"http_url_to_repo":"http://localhost:10080/RD/Even_Bond.git","web_url":"http://localhost:10080/RD/Even_Bond","name":"Even_Bond_Frontend","name_with_namespace":"RD / Even_Bond_Frontend","path":"Even_Bond","path_with_namespace":"RD/Even_Bond"},{"id":8,"http_url_to_repo":"http://localhost:10080/liujie/lp_chengan_html.git","web_url":"http://localhost:10080/liujie/lp_chengan_html","name":"lp_chengan_html","name_with_namespace":"liujie / lp_chengan_html","path":"lp_chengan_html","path_with_namespace":"liujie/lp_chengan_html"},{"id":6,"http_url_to_repo":"http://localhost:10080/RD/Even_LP.git","web_url":"http://localhost:10080/RD/Even_LP","name":"Even_LP","name_with_namespace":"RD / Even_LP","path":"Even_LP","path_with_namespace":"RD/Even_LP"},{"id":5,"http_url_to_repo":"http://localhost:10080/RD/even-admin.git","web_url":"http://localhost:10080/RD/even-admin","name":"Even_admin","name_with_namespace":"RD / Even_admin","path":"even-admin","path_with_namespace":"RD/even-admin"},{"id":1,"http_url_to_repo":"http://localhost:10080/RD/Even.git","web_url":"http://localhost:10080/RD/Even","name":"Even","name_with_namespace":"RD / Even","path":"Even","path_with_namespace":"RD/Even"}]
 }

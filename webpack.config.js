@@ -8,7 +8,7 @@ var pageage = require('./package.json');
 var isPro = process.env.NODE_ENV === 'production';
 var bundleName = conf.bundleName;
 var chunkName = conf.chunkName;
-
+var setup = require('./setup/index');
 // var outputPath = path.join(__dirname, conf.indexDir + conf.staticPath + '/' + confName);
 // var publicPath = baseStatic + '/' + confName + '/';
 var indexData = conf.indexData || {};
@@ -141,6 +141,7 @@ module.exports = {
   plugins: plugins,
   devServer: {
     contentBase: path.join(__dirname, conf.indexDir),
+    setup,
     hot: true
   }
 };

@@ -23,9 +23,10 @@ export default class extends Component {
     return <ul>{tree(this.props.list, this.props.rootPath, this)}</ul>;
   }
 }
-function replaceOnEnter (nextState, replace){
-  replace(this.IndexRedirect);
-}
+// function replaceOnEnter (nextState, replace){
+//   console.log('IndexRedirect', this.IndexRedirect)
+//   replace(this.IndexRedirect);
+// }
 const tree = (arr, rpath, self) => {
   const arr2 = [];
   const pathname = virgin.location.pathname;
@@ -34,18 +35,18 @@ const tree = (arr, rpath, self) => {
     //let target = '';
     let childRoutes = '';
     if (v.childRoutes) {
-      if(v.firstChildIndex && v.childRoutes[0]){
-        v.indexRoute = {
-          IndexRedirect : v.redirectTo,
-          onEnter : replaceOnEnter
-        };
+      // if(v.firstChildIndex && v.childRoutes[0]){
+      //   v.indexRoute = {
+      //     IndexRedirect : v.redirectTo,
+      //     onEnter : replaceOnEnter
+      //   };
+      // }
+      let display = 'none';
+      if(pathname && pathname.indexOf(v.link) === 0){
+        display = 'block';
+        //console.log('ok', v.link, pathname);
       }
-      let isShow = false;
-      if(pathname.indexOf(v.link) === 0){
-        isShow = true;
-        console.log('ok', v.link, pathname);
-      }
-      childRoutes = <ul style={{"display": isShow ?  "block" : "none"}}>{tree(v.childRoutes, v.link)}</ul>;
+      childRoutes = <ul style={{display}}>{tree(v.childRoutes, v.link)}</ul>;
     }
     let LinkOrNode;
     if(v.component){

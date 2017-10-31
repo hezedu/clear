@@ -6,6 +6,9 @@ function ite(result, rpath, depth){
       const lastIndex = i.lastIndexOf('.md');
       if(lastIndex !== -1){
         i = i.substr(0, lastIndex);
+        // if(i === 'README'){
+
+        // }
       }
     }
     const link = rpath + '/' + i;
@@ -15,13 +18,10 @@ function ite(result, rpath, depth){
     };
     if(v){
       obj.childRoutes = ite(v, link, depth + 1);
-      if(obj.childRoutes.length){
-        //obj.link = obj.childRoutes[0].link;
-        obj.redirectTo = obj.childRoutes[0].link;
-        console.log('obj', obj);
-        console.log('obj.childRoutes[0].link',
-        obj.childRoutes[0].link);
-      }
+      // if(obj.childRoutes.length){
+      //   obj.firstChildIndex = true;
+      //   obj.redirectTo = obj.childRoutes[0].link;
+      // }
     }
     obj.path = i;
     obj.title = i;

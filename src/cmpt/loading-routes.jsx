@@ -29,29 +29,31 @@ export default class extends Component {
   getData(){
     const self = this;
     const projectId = self.props.params.id;
-    console.log('projectId', projectId)
-    // window.$.ajax({
-    //
-    // });
-    setTimeout(() => {
-      let data = get14TreeData();
-      console.log('data', data)
-      data = forMatData(data);
-      console.log('data', data)
-      data = initRouter(data, '/' + projectId);
-      console.log('initRouter data', data);
-      const navRoutes = self.getNavRoutes(data);
-      routes.navRoutes = navRoutes;
-      routes.default.childRoutes =  [{
-        path: ':id',
-        component: layout.Top,
-        childRoutes: navRoutes
-      },
-      { path: '*', component: layout.Error}
-      ]
-      const {history , location} = self.props;
-      history.replace(location.pathname);
-    }, 200)
+    //console.log('projectId', projectId)
+
+    window.$.ajax({
+      url: '/api/v3/projects/' + projectId + '/repository/tree?recursive=true',
+      success(data){
+        data = forMatData(data);
+        data = initRouter(data, '/' + projectId);
+        const navRoutes = self.getNavRoutes(data);
+        routes.navRoutes = navRoutes;
+        routes.default.childRoutes =  [{
+          path: ':id',
+          component: layout.Top,
+          childRoutes: navRoutes
+        },
+        { path: '*', component: layout.Error}
+        ]
+        const {history , location} = self.props;
+        history.replace(location.pathname);
+      }
+    });
+
+    // setTimeout(() => {
+    //   let data = get14TreeData();
+
+    // }, 200)
     /*
     window.$.ajax({
       url: '/routes.json',
@@ -100,17 +102,4 @@ export default class extends Component {
       <div>正在加载。。。</div>
     );
   }
-}
-
-
-function get14TreeData(){
-  return [{"name":"Directory","type":"tree","path":"Directory","mode":"040000"},
-  {"name":".gitlab-ci.yml","type":"blob","path":".gitlab-ci.yml","mode":"100644"},
-  {"name":".gitkeep","type":"blob","path":"Directory/.gitkeep","mode":"100644"},
-  {"name":"hellowordp.md","type":"blob","path":"Directory/hellowordp.md","mode":"100644"},
-  {"name":"dir2","type":"tree","path":"Directory/dir2"},
-  {"name":"dir2File.md","type":"blob","path":"Directory/dir2/dir2File.md"},
-  {"id":"524aac15ffcaa557695a0a1daacd9f6f04f927a1","name":"README.md","type":"blob","path":"README.md","mode":"100644"},
-  {"id":"0b7630f0f5f541da02a5cb5238c6347624163053","name":"login.md","type":"blob","path":"login.md","mode":"100644"},
-  {"id":"7639dee25307cbe450a7d3a8f8b45fe0bd2cefc7","name":"rrr.md","type":"blob","path":"rrr.md","mode":"100644"}]
 }

@@ -99,9 +99,21 @@ $leftAHeight:35px;
 .topNavWarp a:hover{
   color:$activeColor;
 }
-.title{padding:0 10px;left:0;
-  color:$defColor;position: absolute;
-  display: block;font-size:1.2em;}
+.title{
+  padding:0 10px;
+  left:0;
+  color:$defColor;
+  width: $leftWidth;
+  position: absolute;
+  overflow: hidden;
+  font-size:1.2em;
+}
+.title_name{
+  margin-left: 10px;
+  // padding: 3px; 
+  // background-color: #000;
+  // color:#fff;
+}
 .title.active{
     color: $activeColor;
   }
@@ -110,7 +122,9 @@ $leftAHeight:35px;
 .topNav a.active, .topNav a:hover{background: $bgColor; color:$activeColor}
 .topRightBar {right:0px;font-size: 16px;position: absolute;color:$defColor;padding-right:40px;height: 100%;}
 .topRightBar a.githubIcon{float: right;position: absolute;right: 0;top:0;height: 100%;padding:0 5px}
-.topRightBar .githubIcon img{width:30px;height: 30px;vertical-align: middle}
+.topRightBar .githubIcon img{
+  width:20px;height: 20px;vertical-align: middle;opacity: .15;
+}
 .loginBar a{color: $defColor; padding:5px 10px;margin-right:10px;}
 
 .bottomWarp{

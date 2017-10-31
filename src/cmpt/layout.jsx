@@ -98,7 +98,7 @@ export class Top extends Component {
         <div className={style.topNavWarp}>
           <div className={style.title}>
             <Link to='/' style={{fontSize: ".6em"}}>Home</Link>
-            <span className={style.title_name}>{name}</span>
+            <Link to={'/' + this.props.params.id}  activeClassName={style.active} className={style.title_name} onlyActiveOnIndex={true}>{name}</Link>
           </div>
           <div className={style.topNav}>
             {this.NavList()}

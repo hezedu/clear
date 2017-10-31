@@ -36,11 +36,12 @@ export default class extends Component {
       success(data){
         data = forMatData(data);
         data = initRouter(data, '/' + projectId);
-        const navRoutes = self.getNavRoutes(data);
+        const {navRoutes, indexRoute} = self.getNavRoutes(data);
         routes.navRoutes = navRoutes;
         routes.default.childRoutes =  [{
           path: ':id',
           component: layout.Top,
+          indexRoute,
           childRoutes: navRoutes
         },
         { path: '*', component: layout.Error}
@@ -91,9 +92,17 @@ export default class extends Component {
       }else{
         v.component = layout.Main;
       }
-      navRoutes.push(v);
+      if(v.isIndex){
+        indexRoute = {
+          component : layout.Main,
+          link: v.link
+        }
+      }else{
+        navRoutes.push(v);
+      }
+      
     });
-    return navRoutes;
+    return {navRoutes, indexRoute};
   }
   componentWillMount(){
     this.getData();

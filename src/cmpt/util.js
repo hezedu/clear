@@ -20,7 +20,7 @@ function ite(result, rpath, depth){
       //   obj.redirectTo = obj.childRoutes[0].link;
       // }
     }else if(i === 'README'){
-      obj.isIndex = true;
+      //obj.isIndex = true;
     }
     obj.path = i;
     obj.title = i;

@@ -19,8 +19,17 @@ export default class extends Component {
         if(child){
           v.firstChildIndex = true;
         }else{
-          v.component = layout.Main;
+          if(v.isIndex){
+            v.path = '';
+            v.indexRoute = {
+              component : layout.Main,
+              link: v.link
+            }
+          }else{
+            v.component = layout.Main;
+          }
         }
+
         this.initLeftTree(child);
       })
     }

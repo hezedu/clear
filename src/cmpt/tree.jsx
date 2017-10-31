@@ -51,7 +51,7 @@ const tree = (arr, rpath, self) => {
     let LinkOrNode;
     if(v.component){
       LinkOrNode = <Link to={v.link} activeClassName={style.active} onlyActiveOnIndex={true}>{v.title}</Link>;
-    }else{
+    }else if(!v.indexRoute){
       //LinkOrNode = <div className="clear-tree-node">{v.title}</div>;
       LinkOrNode = <Link to={v.link}
       className="clear-tree-node"

@@ -97,7 +97,7 @@ export class Top extends Component {
       <div className='height100'>
         <div className={style.topNavWarp}>
           <div className={style.title}>
-            <Link to='/' style={{fontSize: ".6em"}}>Home</Link>
+            <Link to='/' style={{fontSize: ".6em"}}>clear-docs</Link>
             <Link to={'/' + this.props.params.id}  activeClassName={style.active} className={style.title_name} onlyActiveOnIndex={true}>{name}</Link>
           </div>
           <div className={style.topNav}>
@@ -146,7 +146,7 @@ export class Home extends Component {
     return (
       <div className='height100'>
         <div className={style.topNavWarp}>
-          <Link className={style.title} to="/" activeClassName={style.active} onlyActiveOnIndex={true}>Home</Link>
+          <Link className={style.title} to="/" activeClassName={style.active} onlyActiveOnIndex={true}>clear-docs</Link>
           <div className={style.topRightBar}>
             <button className='clear-reload' onClick={this.reload}>reload</button>
             <a href='https://github.com/hezedu/clear/tree/doc-new' target="_blank" className={style.githubIcon}>

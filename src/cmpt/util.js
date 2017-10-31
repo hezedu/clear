@@ -6,9 +6,6 @@ function ite(result, rpath, depth){
       const lastIndex = i.lastIndexOf('.md');
       if(lastIndex !== -1){
         i = i.substr(0, lastIndex);
-        // if(i === 'README'){
-
-        // }
       }
     }
     const link = rpath + '/' + i;
@@ -22,6 +19,8 @@ function ite(result, rpath, depth){
       //   obj.firstChildIndex = true;
       //   obj.redirectTo = obj.childRoutes[0].link;
       // }
+    }else if(i === 'README'){
+      obj.isIndex = true;
     }
     obj.path = i;
     obj.title = i;

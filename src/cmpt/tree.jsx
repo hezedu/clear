@@ -44,7 +44,7 @@ const tree = (arr, rpath, self) => {
       let display = 'none';
       if(pathname && pathname.indexOf(v.link) === 0){
         display = 'block';
-        //console.log('ok', v.link, pathname);
+        console.log('ok', v.link, pathname);
       }
       childRoutes = <ul style={{display}}>{tree(v.childRoutes, v.link)}</ul>;
     }

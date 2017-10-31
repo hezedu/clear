@@ -29,20 +29,24 @@ export class Root extends Component {
 export class Top extends Component {
   state = {
     data: {},
-    isInit: false
+    isInit: false,
+    projectName: ''
   }
   NavList(){
     const arr = [];
     routes.navRoutes.forEach((v) => {
-      if(v.path){
+      //if(v.path){
         // if(v.firstChildIndex && v.childRoutes && v.childRoutes[0]){
         //   v.indexRoute = {
         //     IndexRedirect : v.childRoutes[0].link,
         //     onEnter : topNavOnEnter
         //   };
         // }
-        arr.push(<Link to={v.link} key={v.link} activeClassName={style.active}>{v.title}</Link>);
-      }
+      arr.push(
+      <Link to={v.link} key={v.link} activeClassName={style.active}>
+        {v.title}
+      </Link>);
+      //}
     });
     return arr;
   }
@@ -57,6 +61,11 @@ export class Top extends Component {
   componentWillMount(){
     this.getData();
   }
+  getProjectName(name){
+    name = name || '';
+    name = name.replace('clear-docs-', '');
+    return name;
+  }
   getData(){
 
     const self = this;
@@ -64,10 +73,15 @@ export class Top extends Component {
     window.$.ajax({
       url: '/api/v3/projects/' + projectId,
       success(data){
-        console.log('data', data)
+        //console.log('data', data)
+        
+        let projectName = self.getProjectName(data.name);
         window.path_with_namespace = data.path_with_namespace;
+        window.projectName = projectName;
+        document.title = projectName;
         self.setState({
           data,
+          projectName,
           isInit: true
         })
       }
@@ -77,8 +91,7 @@ export class Top extends Component {
     if(!this.state.isInit){
       return null;
     }
-    let name = this.state.data.name || '';
-    name = name.replace('clear-docs-', '');
+    let name = this.state.projectName;
 
     return (
       <div className='height100'>
@@ -120,6 +133,7 @@ export class Home extends Component {
     })
   }
   componentWillMount(){
+    document.title = 'home';
     this.getData();
   }
   getList(){
@@ -197,9 +211,9 @@ export class Main extends Component {
     const path = props.filePath || props.route.link || props.route.path;
     const projectId = self.props.params.id;
     let file_path = path + '.md';
-    file_path = file_path.substr(projectId.length + 1);
+    file_path = file_path.substr(projectId.length + 2);
     $.ajax({
-      url: '/md/' + window.path_with_namespace + '/raw/master' + file_path,
+      url: '/md/' + window.path_with_namespace + '/raw/master/' + file_path,
       // data: {
       //   file_path,
       //   ref: "master"
@@ -211,6 +225,7 @@ export class Main extends Component {
         })
       }
     })
+    return file_path;
   }
   highlight(){
     const hljs = window.hljs;
@@ -219,7 +234,11 @@ export class Main extends Component {
   }
 
   componentWillMount(){
-    this.loadHtml();
+    let filePath = this.loadHtml();
+    filePath = filePath.split('/');
+    filePath.reverse();
+    filePath = filePath.join(' · ');
+    document.title = filePath + ' · ' + window.projectName;
   }
 
   componentWillReceiveProps(props){
@@ -240,6 +259,7 @@ export class Main extends Component {
 
 //======================错误页（目前仅支持404）======================
 export class Error extends Component {//router
+
   render() {
     return (
       <div className={style.homeTitle}>

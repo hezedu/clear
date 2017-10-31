@@ -82,6 +82,7 @@ export default class extends Component {
   }
   getNavRoutes(data){
     const navRoutes = [];
+    let indexRoute;
     data.forEach(v => {
       if(v.childRoutes){
         v.component = layout.Left;

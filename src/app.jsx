@@ -10,7 +10,16 @@ let history = useRouterHistory(createHashHistory)({queryKey: false});
 history = syncHistoryWithStore(history, routingStore);
 
 import AppRoutes from './router.config';
-
+window.$.ajaxSetup({
+  error(res){
+    if(res.status === 401){
+      return alert('你得先登录gitLab才能仿问。')
+    }
+  }
+})
+// window.$.ajaxError = function(args){
+//   console.log('ajaxError', args)
+// }
 ReactDOM.render(
   <Provider store={routingStore}>
     <Router history={history} routes={AppRoutes} />

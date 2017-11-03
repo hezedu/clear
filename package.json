@@ -1,9 +1,8 @@
 {
-  "name": "test",
-  "version": "1.2.3",
-  "private": true,
+  "name": "clear-docs",
+  "version": "0.0.1",
   "description": "",
-  "main": "app.bundle.js",
+  "main": "pro_server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server -d --history-api-fallback --hot --inline --progress --colors --port 4000",
@@ -11,11 +10,18 @@
     "start_server": "supervisor -i node_modules,public,.git,src server.js",
     "pro": "node script/pro"
   },
-  "ignore": [
-    "dist"
+  "files": [
+    "pro_server",
+    "dist/pro",
+    "dist/static",
+    "index.html"
   ],
   "author": "hezedu",
   "dependencies": {
+    "express": "^4.16.2",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
     "github-markdown-css": "^2.4.1",
     "highlight.js": "^9.9.0",
     "history": "^2.1.2",
@@ -27,9 +33,7 @@
     "react-router-redux": "^4.0.7",
     "redux": "^3.5.2",
     "sas": "^3.0.4",
-    "virgin": "^1.0.1"
-  },
-  "devDependencies": {
+    "virgin": "^1.0.1",
     "babel-core": "^6.14.0",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.5",

@@ -1,24 +1,28 @@
-var eStatic = require('express').static;
-const path = require('path');
+var path = require('path');
+var express = require('express');
+var http = require('http');
+var config = require('./config');
+var requestProxy = require('./lib/request-proxy-same-domain');
+
+var app = express();
+var dir = __dirname;
 var DAY_TIME = 1000 * 60 * 60 * 24 //一天
 var MONTH_TIME  = DAY_TIME * 30 //一月
 //var HALF_YEAR_TIME  = MONTH_TIME * 6; //半年
-var express = require('express');
-var app = express();
-var dir = __dirname;
-var config = require('./config');
 var port = config.port;
-var requestProxy = require('./setup/request-proxy-same-domain');
+var proxyPort = config.proxyPort;
+var distPath = path.join(dir , 'pro');
+var staticPath = path.join(dir , 'static');
 
-app.use('/api/v3', requestProxy(port))
-app.use('/md', requestProxy(port))
+app.use('/api/v3', requestProxy(proxyPort, '/api/v3'));
+app.use('/md', requestProxy(proxyPort, ''));
 
-const distPath = path.join(dir , '/dist/pro');
-  //首頁不緩存
-app.get('/', eStatic(path.join(dir, 'index.html')));
-  //其它緩存一月
-app.use(eStatic(distPath, {maxAge:MONTH_TIME}));
 
+//首頁不緩存
+app.get('/', express.static(dir));
+//其它緩存一月
+app.use(express.static(distPath, {maxAge:MONTH_TIME}));
+app.use(express.static(staticPath, {maxAge:MONTH_TIME}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,6 +42,7 @@ app.use(function(err, req, res, next) {
   res.send(err.message);
 });
 
-var http = require('http');
+
 var server = http.createServer(app);
 server.listen(port);
+console.log('server run ' + port);

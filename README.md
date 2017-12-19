@@ -11,3 +11,5 @@ clearDocs({
   proxyPort: 10080  // gitLab 端口
 });
 ```
+## 使用
+创建`clear-docs-`开头的项目，将会出现在首页。

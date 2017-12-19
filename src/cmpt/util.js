@@ -23,7 +23,7 @@ function ite(result, rpath, depth){
       //obj.isIndex = true;
     }
     obj.path = i;
-    obj.title = i;
+    obj.title = decodeURI(i);
     arr.push(obj);
   }
   return arr;
@@ -41,7 +41,7 @@ export function forMatData(data){
         return;
       }
     }
-    let path = v.path;
+    let path = encodeURI(v.path);
     let pathArr = path.split('/');
     let lastIndex = pathArr.length - 1;
     let _obj = obj;

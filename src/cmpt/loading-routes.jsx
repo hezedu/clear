@@ -53,7 +53,7 @@ export default class extends Component {
           indexRoute,
           childRoutes: navRoutes
         },
-        { path: '*', component: layout.Error}
+        // { path: '*', component: layout.Error}
         ]
         const {history , location} = self.props;
         history.replace(location.pathname);
